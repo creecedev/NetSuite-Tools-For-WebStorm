@@ -4,8 +4,10 @@ NetSuite Tools For WebStorm, is an open-source WebStorm plugin that uses NetSuit
   - Upload Files to NetSuite File Cabinet
   - Compare local File(s) against NetSuite File Cabinet
 
+![Screenshot](https://plugins.jetbrains.com/files/8305/screenshot_15807.png)
+
 # How To Use
-This plugin functions extremely similar to the Eclipse plugin in that all available actions are available in a right-click menu under "NetSuite Tools". When you initially, create a project, you must first setup the project with login/pass/environment, select an account and then specify a root folder for which all actions will be taken relative to. Once the root folder is specified, the project settings are saved. Passwords are stored using the build in Master Password functionality encryption. Once a project is setup, all available action will be present in the right-click menu under "NetSuite Tools".
+This plugin functions extremely similar to the Eclipse plugin in that all available actions are available in a right-click menu under "NetSuite Tools". When you initially, create a project, you must first setup the project with login/pass/environment, select an account and then specify a root folder for which all actions will be taken relative to. Once the root folder is specified, the project settings are saved. Passwords are stored using the built in Master Password functionality encryption. Once a project is setup, all available action will be present in the right-click menu under "NetSuite Tools".
 
 # How To Build
 - Create new Intellij Plugin Project and point to checked out code directory
