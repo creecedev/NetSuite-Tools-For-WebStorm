@@ -1,0 +1,49 @@
+<idea-plugin version="1">
+  <id>netsuite.tools.plugin</id>
+  <name>NetSuite Tools For WebStorm</name>
+  <version>1.0</version>
+
+  <depends>com.intellij.modules.lang</depends>
+
+  <description><![CDATA[
+      <div>
+        <div>
+          <a href="https://github.com/Topher84/NetSuite-Tools-For-WebStorm">[GitHub] NetSuite Tools For WebStorm</a>
+        </div>
+        <div>
+        </div>
+        <div>
+          Open-Source WebStorm plugin that uses NetSuite SuiteTalk 2016.1 WSDL to provide the ability to:
+          <ol>
+            <li>Specify <b><i>any</i></b> NetSuite File Cabinet Folder as the project root directory or select form SuiteScripts or SuiteBundles listing</li>
+            <li>Upload Files to NetSuite File Cabinet</li>
+            <li>Compare local File(s) against NetSuite File Cabinet</li>
+          </ol>
+        </div>
+      </div>
+    ]]></description>
+  <change-notes><![CDATA[
+      Initial Release
+    ]]>
+  </change-notes>
+
+  <idea-version since-build="141.0"/>
+
+  <actions>
+    <group id="com.action.netsuitetools" text="NetSuite Tools" description="NetSuite Tools" popup="true">
+      <add-to-group group-id="ProjectViewPopupMenu" anchor="last"  />
+      <action id="com.action.netsuitetools.setupproject" class="actions.SetupProjectAction" text="Setup Project"
+              description="Setup Project"/>
+      <action id="com.action.netsuitetools.showprojectsettings" class="actions.ShowProjectSettingsAction"
+              text="Show Project Settings" description="Show Project Settings"/>
+      <action id="com.action.netsuitetools.changeprojectsettings" class="actions.ChangeProjectSettingsAction"
+              text="Change Project Settings" description="Change Project Settings"/>
+      <action id="com.action.netsuitetools.upload" class="actions.UploadAction"
+              text="Upload Selected File(s)" description="Upload Selected File(s) to NetSuite File Cabinet"/>
+      <action id="com.action.netsuitetools.comparewithfilecabinet" class="actions.CompareWithFileCabinetAction"
+              text="Compare With File Cabinet" description="Compare Selected File(s) with File Cabinet"/>
+      <action id="com.netsuitetools.recordsbrowser" class="actions.RecordsBrowserAction"
+              text="2016.1 Records Browser" description="2016.1 Records Browser"/>
+    </group>
+  </actions>
+</idea-plugin>
