@@ -23,7 +23,7 @@ If you encounter any issues, please create an issue. I maintain this in my free 
 - Occasionally, an error is thrown about passing things between context (ususally a Project reference). I have resolved most of these but there could be 1 or 2 I haven't seen yet. They usually pop up once and will not interefere with functionality.
 
 # Releases
-This plugin is available in the JetBrains Plugin Repository and I will periodically release when there is content to warrant a new release.
+NetSuite Tools For WebStorm is available in the [JetBrains Plugin Repository](https://plugins.jetbrains.com/plugin/8305?pr=idea) and I will periodically release when there is content to warrant a new release.
 
 Licenses
 ----
