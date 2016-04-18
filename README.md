@@ -27,9 +27,12 @@ NetSuite Tools For WebStorm is available in the [JetBrains Plugin Repository](ht
 
 Licenses
 ----
-
 MIT
 
 NetSuite Application Developer License
 ----
 NetSuite Application Developer License is included in /src and must be agreed to
+
+About Me
+----
+[View My LinkedIn](https://www.linkedin.com/pub/chris-reece/118/853/424)

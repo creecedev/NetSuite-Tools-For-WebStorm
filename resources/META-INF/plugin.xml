@@ -1,7 +1,7 @@
 <idea-plugin version="1">
   <id>netsuite.tools.plugin</id>
   <name>NetSuite Tools For WebStorm</name>
-  <version>1.0</version>
+  <version>1.0.1</version>
 
   <depends>com.intellij.modules.lang</depends>
 
@@ -15,7 +15,7 @@
         <div>
           Open-Source WebStorm plugin that uses NetSuite SuiteTalk 2016.1 WSDL to provide the ability to:
           <ol>
-            <li>Specify <b><i>any</i></b> NetSuite File Cabinet Folder as the project root directory or select form SuiteScripts or SuiteBundles listing</li>
+            <li>Specify <b><i>any</i></b> NetSuite File Cabinet Folder as the project root directory or select from SuiteScripts or SuiteBundles listing</li>
             <li>Upload Files to NetSuite File Cabinet</li>
             <li>Compare local File(s) against NetSuite File Cabinet</li>
           </ol>
@@ -23,7 +23,7 @@
       </div>
     ]]></description>
   <change-notes><![CDATA[
-      Initial Release
+      1. Added fix to correctly pull back Administrator and Full Access accounts
     ]]>
   </change-notes>
 
