@@ -51,15 +51,13 @@ public class AccountsUI extends JDialog {
 
         for (int i = 0; i < nsAccounts.size(); i++) {
             NSAccount account = nsAccounts.get(i);
-            if (account.getRoleName().equals("Administrator")) {
-                Vector<Object> row = new Vector<Object>();
-                row.add(account.getAccountName());
-                row.add(account.getAccountId());
-                row.add(account.getRoleName());
-                row.add(account.getRoleId());
+            Vector<Object> row = new Vector<Object>();
+            row.add(account.getAccountName());
+            row.add(account.getAccountId());
+            row.add(account.getRoleName());
+            row.add(account.getRoleId());
 
-                model.addRow(row);
-            }
+            model.addRow(row);
         }
 
         accountsTable.setModel(model);

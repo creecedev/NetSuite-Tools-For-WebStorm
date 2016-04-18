@@ -20,6 +20,8 @@ public class NSRolesRestServiceController {
     final private String NS_WEB_SERVICES_END_POINT                 = "/services/NetSuitePort_" + NS_WSDL_VERSION;
     final private String NS_SANDBOX_WEB_SERVICES_URL               = "https://webservices.sandbox.netsuite.com";
     final private String NS_RELEASE_PREVIEW_WEB_SERVICES_URL       = "https://webservices.na1.beta.netsuite.com";
+    private final String ADMINISTRATOR_ROLE_ID                     = "3";
+    private final String FULL_ACCESS_ROLE_ID                       = "18";
 
     private String buildNLAuthString(String nsEmail, String nsPassword) {
         return "NLAuth nlauth_email=" + nsEmail + ", nlauth_signature=" + nsPassword;
@@ -67,17 +69,20 @@ public class NSRolesRestServiceController {
                         JSONObject accountJSON = accountsJSON.getJSONObject(i);
 
                         if (accountJSON.has("account") && accountJSON.has("dataCenterURLs")) {
-                            nsAccounts.add(new NSAccount(accountJSON.getJSONObject("account").get("internalId").toString(),
-                                                         accountJSON.getJSONObject("account").get("name").toString(),
-                                                         nsEmail,
-                                                         nsPassword,
-                                                         accountJSON.getJSONObject("role").get("internalId").toString(),
-                                                         accountJSON.getJSONObject("role").get("name").toString(),
-                                                         accountJSON.getJSONObject("dataCenterURLs").get("restDomain").toString(),
-                                                         accountJSON.getJSONObject("dataCenterURLs").get("webservicesDomain").toString().concat(NS_WEB_SERVICES_END_POINT),
-                                                         NS_SANDBOX_WEB_SERVICES_URL.concat(NS_WEB_SERVICES_END_POINT),
-                                                         NS_RELEASE_PREVIEW_WEB_SERVICES_URL.concat(NS_WEB_SERVICES_END_POINT),
-                                                         accountJSON.getJSONObject("dataCenterURLs").get("systemDomain").toString()));
+                            if (accountJSON.getJSONObject("role").get("internalId").toString().equals(ADMINISTRATOR_ROLE_ID) ||
+                                    accountJSON.getJSONObject("role").get("internalId").toString().equals(FULL_ACCESS_ROLE_ID)) {
+                                        nsAccounts.add(new NSAccount(accountJSON.getJSONObject("account").get("internalId").toString(),
+                                        accountJSON.getJSONObject("account").get("name").toString(),
+                                        nsEmail,
+                                        nsPassword,
+                                        accountJSON.getJSONObject("role").get("internalId").toString(),
+                                        accountJSON.getJSONObject("role").get("name").toString(),
+                                        accountJSON.getJSONObject("dataCenterURLs").get("restDomain").toString(),
+                                        accountJSON.getJSONObject("dataCenterURLs").get("webservicesDomain").toString().concat(NS_WEB_SERVICES_END_POINT),
+                                        NS_SANDBOX_WEB_SERVICES_URL.concat(NS_WEB_SERVICES_END_POINT),
+                                        NS_RELEASE_PREVIEW_WEB_SERVICES_URL.concat(NS_WEB_SERVICES_END_POINT),
+                                        accountJSON.getJSONObject("dataCenterURLs").get("systemDomain").toString()));
+                            }
                         }
                     }
                 } catch (Exception ex) {
