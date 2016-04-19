@@ -16,13 +16,28 @@ public class ProjectHelper {
     }
 
     public String getProjectFilePathFromRootDirectory(VirtualFile file , String projectBaseDirectory) {
-        String[] filePath = file.getPath().split(projectBaseDirectory);
+        String[] filePath = file.getPath().split("/");
+        String path = "";
+        Boolean foundRoot = false;
 
-        if (filePath.length > 0) {
-            String path = filePath[filePath.length-1];
-            return path.substring(1, path.length());
+        for (String pathPiece : filePath) {
+            if (foundRoot) {
+                if (!path.isEmpty()) {
+                    path = path.concat("/");
+                }
+
+                path = path.concat(pathPiece);
+            }
+
+            if (pathPiece.equals(projectBaseDirectory)) {
+                foundRoot = true;
+            }
         }
 
-        return null;
+        if (path.isEmpty()) {
+            return null;
+        }
+
+        return path;
     }
 }

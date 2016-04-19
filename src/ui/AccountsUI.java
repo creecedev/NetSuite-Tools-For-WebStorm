@@ -33,6 +33,10 @@ public class AccountsUI extends JDialog {
 
         ArrayList<NSAccount> nsAccounts = nsRolesRestServiceController.getNSAccounts(nsEmail, nsPassword, nsEnvironment);
 
+        if (nsAccounts == null) {
+            JOptionPane.showMessageDialog(null, "Error getting NetSuite Accounts from Roles Rest Service",  "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+
         Collections.sort(nsAccounts);
 
         this.nsAccounts = nsAccounts;
