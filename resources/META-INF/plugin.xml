@@ -1,7 +1,7 @@
 <idea-plugin version="1">
   <id>netsuite.tools.plugin</id>
   <name>NetSuite Tools For WebStorm</name>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
 
   <depends>com.intellij.modules.lang</depends>
 
@@ -23,7 +23,8 @@
       </div>
     ]]></description>
   <change-notes><![CDATA[
-      1. Added fix to correctly pull back Administrator and Full Access accounts
+      1.0.1 Added fix to correctly pull back Administrator and Full Access accounts
+      1.0.2 Added fix to correctly search for files that share the same name as the root at the beginning
     ]]>
   </change-notes>
 
