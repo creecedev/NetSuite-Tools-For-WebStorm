@@ -126,10 +126,10 @@ public class CompareWithFileCabinetAction extends AnAction {
                     } else {
                         try {
                             if (currentParentFolder != null) {
-                                String fileId = nsClient.searchFile(foldersAndFile[i], currentParentFolder);
+                                String fileId = nsClient.searchFile(foldersAndFile[i], currentParentFolder, projectSettingsController.getNsRootFolder());
 
                                 if (fileId != null) {
-                                    fileIds.add(nsClient.searchFile(foldersAndFile[i], currentParentFolder));
+                                    fileIds.add(nsClient.searchFile(foldersAndFile[i], currentParentFolder, projectSettingsController.getNsRootFolder()));
                                 } else {
                                     JOptionPane.showMessageDialog(null, "File: " + foldersAndFile[i] + " Does not exist in NetSuite File Cabinet", "ERROR", JOptionPane.ERROR_MESSAGE);
                                 }

@@ -298,7 +298,7 @@ public class NSClient	{
         return null;
     }
 
-    public String searchFile(String fileName, String parentFolderId) throws RemoteException {
+    public String searchFile(String fileName, String parentFolderId, String projectSettingsRootFolderId) throws RemoteException {
         try {
             login();
         } catch (Exception ex) {
@@ -335,8 +335,17 @@ public class NSClient	{
             RecordList myRecordlist = results.getRecordList();
 
             if (myRecordlist != null && myRecordlist.getRecord() != null) {
-                File foundFile = (File) myRecordlist.getRecord(0);
-                return foundFile.getInternalId();
+                File foundFile = null;
+
+                if (parentFolderId.equals(projectSettingsRootFolderId)) {
+                    foundFile = (File) myRecordlist.getRecord(results.getTotalRecords()-1);
+                } else {
+                    foundFile = (File) myRecordlist.getRecord(0);
+                }
+
+                if (foundFile != null) {
+                    return foundFile.getInternalId();
+                }
             }
         }
 
