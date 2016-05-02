@@ -1,30 +1,35 @@
 <idea-plugin version="1">
   <id>netsuite.tools.plugin</id>
   <name>NetSuite Tools For WebStorm</name>
-  <version>1.0.2</version>
+  <version>1.0.3</version>
 
   <depends>com.intellij.modules.lang</depends>
 
   <description><![CDATA[
       <div>
         <div>
-          <a href="https://github.com/Topher84/NetSuite-Tools-For-WebStorm">[GitHub] NetSuite Tools For WebStorm</a>
+          <a href="https://github.com/Topher84/NetSuite-Tools-For-WebStorm">[GitHub] NetSuite Tools For WebStorm</a> <br />
+          <a href="https://www.linkedin.com/in/creece84">[LinkedIn] Plugin Author</a>
         </div>
         <div>
         </div>
         <div>
-          Open-Source WebStorm plugin that uses NetSuite SuiteTalk 2016.1 WSDL to provide the ability to:
+          Note: This plugin targets WebStorm for JavaScript development but will work with any JetBrains IDE. <br /><br /><br />
+          Open source WebStorm IDE plugin that uses NetSuite SuiteTalk 2016.1 WSDL to provide the ability to:
           <ol>
             <li>Specify <b><i>any</i></b> NetSuite File Cabinet Folder as the project root directory or select from SuiteScripts or SuiteBundles listing</li>
-            <li>Upload Files to NetSuite File Cabinet</li>
+            <li>Upload Folder(s) and File(s) to NetSuite File Cabinet</li>
             <li>Compare local File(s) against NetSuite File Cabinet</li>
           </ol>
         </div>
       </div>
     ]]></description>
   <change-notes><![CDATA[
-      1.0.1 Added fix to correctly pull back Administrator and Full Access accounts
-      1.0.2 Added fix to correctly search for files that share the same name as the root at the beginning
+  <ul>
+      <li>1.0.1 Added fix to correctly pull back Administrator and Full Access accounts</li>
+      <li>1.0.2 Added fix to correctly search for files that share the same name as the root at the beginning</li>
+      <li>1.0.3 Added fix to correctly search for files with the same name in the root and multiple sub-folders</li>
+  </ul>
     ]]>
   </change-notes>
 
