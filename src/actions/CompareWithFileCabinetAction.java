@@ -30,6 +30,8 @@ public class CompareWithFileCabinetAction extends AnAction {
 
     @Override
     public void actionPerformed(AnActionEvent e) {
+        final Project project = e.getProject();
+        final VirtualFile[] projectFiles = e.getData(PlatformDataKeys.VIRTUAL_FILE_ARRAY);
         ProjectHelper projectHelper = new ProjectHelper();
         ProjectSettingsController projectSettingsController = new ProjectSettingsController(e.getProject());
         String currentEnvironment = projectSettingsController.getNsEnvironment();
@@ -47,9 +49,6 @@ public class CompareWithFileCabinetAction extends AnAction {
             JOptionPane.showMessageDialog(null, "Exception creating new NSClient" + ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
-
-        final Project project = e.getProject();
-        final VirtualFile[] projectFiles = e.getData(PlatformDataKeys.VIRTUAL_FILE_ARRAY);
 
         ArrayList<String> fileIds = getSelectedFileIds(projectHelper.getProjectRootDirectory(project), projectFiles, nsClient, projectSettingsController);
 

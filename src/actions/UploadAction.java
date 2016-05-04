@@ -30,8 +30,9 @@ public class UploadAction extends AnAction {
 
     @Override
     public void actionPerformed(AnActionEvent e) {
-        final ProjectHelper projectHelper = new ProjectHelper();
         final Project project = e.getProject();
+        final VirtualFile[] files = e.getData(PlatformDataKeys.VIRTUAL_FILE_ARRAY);
+        final ProjectHelper projectHelper = new ProjectHelper();
 
         ProjectSettingsController projectSettingsController = new ProjectSettingsController(project);
 
@@ -51,8 +52,6 @@ public class UploadAction extends AnAction {
             JOptionPane.showMessageDialog(null, "Error creating NSClient", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
-
-        final VirtualFile[] files = e.getData(PlatformDataKeys.VIRTUAL_FILE_ARRAY);
 
         processFiles(projectHelper.getProjectRootDirectory(project), files, nsClient, projectSettingsController);
 
