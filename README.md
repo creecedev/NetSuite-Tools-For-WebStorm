@@ -14,13 +14,13 @@ This plugin functions extremely similar to the Eclipse plugin in that all availa
 - Add all axis .jar files under the resources/axis_1-4 as dependencies in "Module Settings"
 - Add jettison-1.3.2.jar under /Applications/IntelliJ IDEA.app/Contents/lib or wherever you download it and place it as a dependency in "Module Settings"
 - Add nsws-2016_1.jar under resources/ as a dependency in "Module Settings"
+- "Export" should be checked for all of the above added .jar files so that they will be included with the plugin when built
 
 # Resolving Issues
 If you encounter any issues, please create an issue. I maintain this in my free time so helping correct an issue is much appreciated.
 
 # Known Issues
-- There needs to be some code cleanup and some better error handling which I am aware of. 
-- Occasionally, an error is thrown about passing things between context (usually a Project reference). I have resolved most of these but there could be 1 or 2 I haven't seen yet. They usually pop up once and will not interfere with functionality.
+- There needs to be some code cleanup and some better error handling which I am aware of.
 
 # Releases
 NetSuite Tools For WebStorm is available in the [JetBrains Plugin Repository](https://plugins.jetbrains.com/plugin/8305?pr=idea) and I will periodically release when there is content to warrant a new release.
