@@ -32,39 +32,39 @@ public class AccountsUI extends JDialog {
         NSRolesRestServiceController nsRolesRestServiceController = new NSRolesRestServiceController();
 
         ArrayList<NSAccount> nsAccounts = nsRolesRestServiceController.getNSAccounts(nsEmail, nsPassword, nsEnvironment);
-
+        
         if (nsAccounts == null) {
-            JOptionPane.showMessageDialog(null, "Error getting NetSuite Accounts from Roles Rest Service",  "ERROR", JOptionPane.ERROR_MESSAGE);
-        }
+            JOptionPane.showMessageDialog(null, "Error getting NetSuite Accounts from Roles Rest Service.\nPlease verify that your e-mail and password are correct.",  "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else {
+            Collections.sort(nsAccounts);
 
-        Collections.sort(nsAccounts);
+            this.nsAccounts = nsAccounts;
 
-        this.nsAccounts = nsAccounts;
+            DefaultTableModel model = new DefaultTableModel() {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+            };
 
-        DefaultTableModel model = new DefaultTableModel() {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
+            model.addColumn("ACCOUNT NAME");
+            model.addColumn("ACCOUNT ID");
+            model.addColumn("ROLE NAME");
+            model.addColumn("ROLE ID");
+
+            for (int i = 0; i < nsAccounts.size(); i++) {
+                NSAccount account = nsAccounts.get(i);
+                Vector<Object> row = new Vector<Object>();
+                row.add(account.getAccountName());
+                row.add(account.getAccountId());
+                row.add(account.getRoleName());
+                row.add(account.getRoleId());
+
+                model.addRow(row);
             }
-        };
 
-        model.addColumn("ACCOUNT NAME");
-        model.addColumn("ACCOUNT ID");
-        model.addColumn("ROLE NAME");
-        model.addColumn("ROLE ID");
-
-        for (int i = 0; i < nsAccounts.size(); i++) {
-            NSAccount account = nsAccounts.get(i);
-            Vector<Object> row = new Vector<Object>();
-            row.add(account.getAccountName());
-            row.add(account.getAccountId());
-            row.add(account.getRoleName());
-            row.add(account.getRoleId());
-
-            model.addRow(row);
+            accountsTable.setModel(model);
         }
-
-        accountsTable.setModel(model);
 
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -132,5 +132,9 @@ public class AccountsUI extends JDialog {
 
     private void onCancel() {
         dispose();
+    }
+
+    public ArrayList<NSAccount> getNsAccounts() {
+        return this.nsAccounts;
     }
 }

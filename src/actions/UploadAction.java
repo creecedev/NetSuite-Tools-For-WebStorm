@@ -5,7 +5,6 @@ import com.intellij.openapi.ui.popup.Balloon;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.openapi.wm.WindowManager;
 import com.intellij.ui.awt.RelativePoint;
-import org.jdesktop.swingx.border.DropShadowBorder;
 import projectsettings.ProjectSettingsController;
 import netsuite.*;
 
@@ -16,7 +15,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class UploadAction extends AnAction {
 

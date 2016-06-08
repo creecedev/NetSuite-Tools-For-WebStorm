@@ -72,9 +72,12 @@ public class CredentialsUI extends JDialog {
 
         this.setVisible(false);
         AccountsUI accountsUI = new AccountsUI(emailField.getText(), String.valueOf(passwordField.getPassword()), environmentComboBox.getSelectedItem().toString(), this.project);
-        accountsUI.pack();
-        accountsUI.setLocationRelativeTo(null);
-        accountsUI.setVisible(true);
+
+        if (accountsUI.getNsAccounts() != null) {
+            accountsUI.pack();
+            accountsUI.setLocationRelativeTo(null);
+            accountsUI.setVisible(true);
+        }
 
         dispose();
     }

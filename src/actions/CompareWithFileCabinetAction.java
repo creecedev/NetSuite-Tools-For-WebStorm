@@ -24,8 +24,8 @@ public class CompareWithFileCabinetAction extends AnAction {
         final Project project = e.getProject();
         final VirtualFile file = e.getData(PlatformDataKeys.VIRTUAL_FILE);
         ProjectSettingsController projectSettingsController = new ProjectSettingsController(project);
-        e.getPresentation().setVisible(!file.isDirectory() && projectSettingsController.hasAllProjectSettings());
-        e.getPresentation().setEnabled(!file.isDirectory() && projectSettingsController.hasAllProjectSettings());
+        e.getPresentation().setVisible(file != null && !file.isDirectory() && projectSettingsController.hasAllProjectSettings());
+        e.getPresentation().setEnabled(file != null && !file.isDirectory() && projectSettingsController.hasAllProjectSettings());
     }
 
     @Override
