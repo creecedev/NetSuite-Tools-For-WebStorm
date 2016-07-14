@@ -7,6 +7,7 @@ import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 public class NSRolesRestServiceController {
@@ -22,9 +23,14 @@ public class NSRolesRestServiceController {
     final private String NS_RELEASE_PREVIEW_WEB_SERVICES_URL       = "https://webservices.na1.beta.netsuite.com";
     private final String ADMINISTRATOR_ROLE_ID                     = "3";
     private final String FULL_ACCESS_ROLE_ID                       = "18";
+    private final String UTF_8_ENCODING                            = "UTF-8";
 
     private String buildNLAuthString(String nsEmail, String nsPassword) {
-        return "NLAuth nlauth_email=" + nsEmail + ", nlauth_signature=" + nsPassword;
+        try {
+            return "NLAuth nlauth_email=" + URLEncoder.encode(nsEmail, UTF_8_ENCODING) + ", nlauth_signature=" + URLEncoder.encode(nsPassword, UTF_8_ENCODING);
+        } catch (Exception ex) {
+            return null;
+        }
     }
 
     private String getNSRolesRestServiceJSON(String nsEmail, String nsPassword, String nsEnvironment) {

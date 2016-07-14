@@ -122,7 +122,6 @@ public class NSClient	{
         try {
             readResponse = _port.get(recordRef);
         } catch (Exception ex) {
-            System.out.print("ERROR: " + ex.getMessage());
             return null;
         }
 
@@ -215,7 +214,6 @@ public class NSClient	{
 
             // Process result
             if (results.getStatus().isIsSuccess()) {
-                System.out.println("Search is successful");
                 return results;
             }
         }
