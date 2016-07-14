@@ -1,7 +1,7 @@
 <idea-plugin version="1">
   <id>netsuite.tools.plugin</id>
   <name>NetSuite Tools For WebStorm</name>
-  <version>1.0.5</version>
+  <version>1.0.6</version>
   
   <depends>com.intellij.modules.lang</depends>
 
@@ -31,6 +31,7 @@
       <li>1.0.3 Added fix to correctly search for files with the same name in the root and multiple sub-folders</li>
       <li>1.0.4 Added fix to potentially correct a "context passing" exception that randomly occurs when uploading files</li>
       <li>1.0.5 Added fixes for several reported null pointer exceptions and some very minor code cleanup</li>
+      <li>1.0.6 Added fix to UTF-8 encode e-mail and password to account for special characters</li>
   </ul>
     ]]>
   </change-notes>
