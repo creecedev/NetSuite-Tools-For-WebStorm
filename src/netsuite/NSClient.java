@@ -128,21 +128,29 @@ public class NSClient	{
         return (File)readResponse.getRecord();
     }
 
-    public void uploadFile(String nsFileName, String filePath, String nsParentFolder, String fileType) throws RemoteException {
+    public void uploadFile(String nsFileName, String filePath, String fileInternalId, String nsParentFolder, String fileType) throws RemoteException {
         try {
             login();
         } catch (Exception ex) {
             return;
         }
 
+        Boolean shouldUpdate = false;
 
-        File uploadFile = new File();
+        File uploadFile = null;
+
+        if (fileInternalId != null) {
+            uploadFile = downloadFile(fileInternalId);
+            shouldUpdate = true;
+        } else {
+            uploadFile = new File();
+            uploadFile.setName(nsFileName);
+            RecordRef folderRef = new RecordRef();
+            folderRef.setInternalId(nsParentFolder);
+            uploadFile.setFolder(folderRef);
+        }
+
         uploadFile.setAttachFrom(FileAttachFrom._computer);
-        uploadFile.setName(nsFileName);
-
-        RecordRef folderRef = new RecordRef();
-        folderRef.setInternalId(nsParentFolder);
-        uploadFile.setFolder(folderRef);
 
         if (fileType != null) {
             if (fileType.trim().toLowerCase().equals("plaintext"))
@@ -159,8 +167,13 @@ public class NSClient	{
         }
 
         uploadFile.setContent(loadFile(filePath));
-
-        _port.add(uploadFile);
+        uploadFile.setFileSize(null);
+        
+        if (shouldUpdate) {
+            _port.update(uploadFile);
+        } else {
+            _port.add(uploadFile);
+        }
     }
 
     private byte[] loadFile(String sFileName) {

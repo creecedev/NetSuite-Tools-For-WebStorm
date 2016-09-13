@@ -92,7 +92,8 @@ public class UploadAction extends AnAction {
                             }
                         } else {
                             try {
-                                nsClient.uploadFile(foldersAndFile[i], file.getPath(), currentParentFolder, "");
+                                String fileId = nsClient.searchFile(foldersAndFile[i], currentParentFolder, projectSettingsController.getNsRootFolder());
+                                nsClient.uploadFile(foldersAndFile[i], file.getPath(), fileId, currentParentFolder, "");
                             } catch (Exception ex) {
                                 JOptionPane.showMessageDialog(null, "Error uploading file", "ERROR", JOptionPane.ERROR_MESSAGE);
                             }
