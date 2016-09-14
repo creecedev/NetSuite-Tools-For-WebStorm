@@ -128,11 +128,11 @@ public class NSClient	{
         return (File)readResponse.getRecord();
     }
 
-    public void uploadFile(String nsFileName, String filePath, String fileInternalId, String nsParentFolder, String fileType) throws RemoteException {
+    public WriteResponse uploadFile(String nsFileName, String filePath, String fileInternalId, String nsParentFolder, String fileType) throws RemoteException {
         try {
             login();
         } catch (Exception ex) {
-            return;
+            return null;
         }
 
         Boolean shouldUpdate = false;
@@ -168,12 +168,12 @@ public class NSClient	{
 
         uploadFile.setContent(loadFile(filePath));
         uploadFile.setFileSize(null);
-        
+
         if (shouldUpdate) {
-            _port.update(uploadFile);
-        } else {
-            _port.add(uploadFile);
+            return _port.update(uploadFile);
         }
+
+        return _port.add(uploadFile);
     }
 
     private byte[] loadFile(String sFileName) {

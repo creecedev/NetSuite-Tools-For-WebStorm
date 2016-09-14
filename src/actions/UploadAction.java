@@ -1,5 +1,7 @@
 package actions;
 
+import com.netsuite.webservices.platform.messages_2016_1.WriteResponse;
+
 import com.intellij.openapi.ui.MessageType;
 import com.intellij.openapi.ui.popup.Balloon;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
@@ -51,24 +53,17 @@ public class UploadAction extends AnAction {
             return;
         }
 
-        processFiles(projectHelper.getProjectRootDirectory(project), files, nsClient, projectSettingsController);
-
-        JBPopupFactory.getInstance()
-                .createHtmlTextBalloonBuilder("<h3>Files Uploaded</h3>", MessageType.INFO, null)
-                .setFadeoutTime(3000)
-                .createBalloon()
-                .show(RelativePoint.getNorthEastOf(WindowManager.getInstance().getIdeFrame(project).getComponent()),
-                        Balloon.Position.above);
+        processFiles(project, projectHelper.getProjectRootDirectory(project), files, nsClient, projectSettingsController);
     }
 
-    private void processFiles(String projectBaseDirectory, VirtualFile[] files, NSClient nsClient, ProjectSettingsController projectSettingsController) {
+    private void processFiles(Project project, String projectBaseDirectory, VirtualFile[] files, NSClient nsClient, ProjectSettingsController projectSettingsController) {
         if (files == null || files.length == 0) {
             return;
         }
 
         for (VirtualFile file : files) {
             if (file.isDirectory()) {
-                processFiles(projectBaseDirectory, file.getChildren(), nsClient, projectSettingsController);
+                processFiles(project, projectBaseDirectory, file.getChildren(), nsClient, projectSettingsController);
             } else {
                 final ProjectHelper projectHelper = new ProjectHelper();
                 String projectFilePathFromRootDirectory = projectHelper.getProjectFilePathFromRootDirectory(file, projectBaseDirectory);
@@ -93,7 +88,29 @@ public class UploadAction extends AnAction {
                         } else {
                             try {
                                 String fileId = nsClient.searchFile(foldersAndFile[i], currentParentFolder, projectSettingsController.getNsRootFolder());
-                                nsClient.uploadFile(foldersAndFile[i], file.getPath(), fileId, currentParentFolder, "");
+                                WriteResponse response = nsClient.uploadFile(foldersAndFile[i], file.getPath(), fileId, currentParentFolder, "");
+
+                                if (!response.getStatus().isIsSuccess()) {
+                                    JBPopupFactory.getInstance()
+                                            .createHtmlTextBalloonBuilder("<h3>" + foldersAndFile[i] + " Failed To Upload</h3>", MessageType.ERROR, null)
+                                            .setFadeoutTime(3000)
+                                            .createBalloon()
+                                            .show(RelativePoint.getNorthEastOf(WindowManager.getInstance().getIdeFrame(project).getComponent()),
+                                                    Balloon.Position.above);
+
+                                    JOptionPane.showMessageDialog(null, "File: " + foldersAndFile[i] + "\n" +
+                                                                        "NetSuite File Cabinet Parent Folder ID: " + currentParentFolder + "\n" +
+                                                                        "Error Details: " + response.getStatus().getStatusDetail(response.getStatus().getStatusDetail().length - 1).getMessage(),
+                                                                        "FILE UPLOAD ERROR",
+                                                                        JOptionPane.ERROR_MESSAGE);
+                                } else {
+                                    JBPopupFactory.getInstance()
+                                            .createHtmlTextBalloonBuilder("<h3>" + foldersAndFile[i] + " Uploaded Successfully</h3>", MessageType.INFO, null)
+                                            .setFadeoutTime(3000)
+                                            .createBalloon()
+                                            .show(RelativePoint.getNorthEastOf(WindowManager.getInstance().getIdeFrame(project).getComponent()),
+                                                    Balloon.Position.above);
+                                }
                             } catch (Exception ex) {
                                 JOptionPane.showMessageDialog(null, "Error uploading file", "ERROR", JOptionPane.ERROR_MESSAGE);
                             }

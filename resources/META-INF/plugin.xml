@@ -1,7 +1,7 @@
 <idea-plugin version="1">
   <id>netsuite.tools.plugin</id>
   <name>NetSuite Tools For WebStorm</name>
-  <version>1.0.7</version>
+  <version>1.0.8</version>
   
   <depends>com.intellij.modules.lang</depends>
 
@@ -14,7 +14,7 @@
         <div>
         </div>
         <div>
-          Note: This plugin targets WebStorm for JavaScript development but will work with any JetBrains IDE. <br /><br /><br />
+          <br /><br />
           Open source WebStorm IDE plugin that uses NetSuite SuiteTalk 2016.1 WSDL to provide the ability to:
           <ol>
             <li>Specify <b><i>any</i></b> NetSuite File Cabinet Folder as the project root directory or select from SuiteScripts or SuiteBundles listing</li>
@@ -33,6 +33,7 @@
       <li>1.0.5 Added fixes for several reported null pointer exceptions and some very minor code cleanup</li>
       <li>1.0.6 Added fix to UTF-8 encode e-mail and password to account for special characters</li>
       <li>1.0.7 Added fix to not overwrite file properties when uploading files</li>
+      <li>1.0.8 Added fix to not show success when files fail to upload and also now display upload failure detail<li>
   </ul>
     ]]>
   </change-notes>
