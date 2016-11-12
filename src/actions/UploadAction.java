@@ -1,5 +1,6 @@
 package actions;
 
+import com.intellij.openapi.editor.Document;
 import com.netsuite.webservices.platform.messages_2016_1.WriteResponse;
 
 import com.intellij.openapi.ui.MessageType;
@@ -15,6 +16,7 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.fileEditor.FileDocumentManager;
 
 import javax.swing.*;
 
@@ -65,8 +67,11 @@ public class UploadAction extends AnAction {
             if (file.isDirectory()) {
                 processFiles(project, projectBaseDirectory, file.getChildren(), nsClient, projectSettingsController);
             } else {
+                saveFile(file);
+
                 final ProjectHelper projectHelper = new ProjectHelper();
                 String projectFilePathFromRootDirectory = projectHelper.getProjectFilePathFromRootDirectory(file, projectBaseDirectory);
+
                 if (projectFilePathFromRootDirectory != null) {
 
                     String[] foldersAndFile = projectFilePathFromRootDirectory.split("/");
@@ -118,6 +123,15 @@ public class UploadAction extends AnAction {
                     }
                 }
             }
+        }
+    }
+
+    private void saveFile(VirtualFile file) {
+        FileDocumentManager fileDocumentManager = FileDocumentManager.getInstance();
+        Document document = fileDocumentManager.getDocument(file);
+
+        if (fileDocumentManager.isDocumentUnsaved(document)) {
+            fileDocumentManager.saveDocument(document);
         }
     }
 }
