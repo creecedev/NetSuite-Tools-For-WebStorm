@@ -1,37 +1,42 @@
 # NetSuite Tools For WebStorm
 NetSuite Tools For WebStorm, is an open-source WebStorm plugin that uses NetSuite SuiteTalk 2016.1 WSDL to provide the ability to:
-  - Specify ANY NetSuite File Cabinet Folder as the project root directory or select from any folder within SuiteScripts or SuiteBundles
-  - Upload Files to NetSuite File Cabinet
-  - Compare local File(s) against NetSuite File Cabinet
+  - Specify any NetSuite File Cabinet Folder as the project root directory or select from any folder within SuiteScripts or SuiteBundles
+  - Upload single or groups of files to NetSuite File Cabinet
+  - Compare local files against NetSuite File Cabinet
 
+Available Options:
 ![Screenshot](https://plugins.jetbrains.com/files/8305/screenshot_15807.png)
 
 # How To Use
-This plugin functions extremely similar to the Eclipse plugin in that all available actions are available in a right-click menu under "NetSuite Tools". When you initially, create a project, you must first setup the project with login/pass/environment, select an account and then specify a root folder for which all actions will be taken relative to. Once the root folder is specified, the project settings are saved. Passwords are stored using the built in Master Password functionality encryption. Once a project is setup, all available action will be present in the right-click menu under "NetSuite Tools".
+### Projet Creation
+When a project is initially created, the project must be setup with a login, password, environment and NetSuite File Cabinet root folder. These credentials are stored using IntelliJ IDEA Open API PasswordSafe class so they are securely handled and encrypted behind your master password. Once a project is successfully setup, all available actions will be present in the "NetSuite Tools" list which is available by right-clicking on the project.
+
+*Please note that if you forget your master password, you will have to create a new one and go through the project setup again.*
+
+### General Tips
+- Keyboard shortcuts for availble actions such as "Upload Selected File(s)" can be set in the IDE prefrences under Keymap -> Plug-ins -> NetSuite Tools For WebStorm.
+- Any external diff tool specified in the IDE preferences will be respected when comparing local files against the NetSuite File Cabinet. Otherwise, the default IDE diff tool will be used.
 
 # How To Build
-- Create new Intellij Plugin Project and point to checked out code directory
-- Add all axis .jar files under the resources/axis_1-4 as dependencies in "Module Settings"
-- Add jettison-1.3.2.jar under /Applications/IntelliJ IDEA.app/Contents/lib or wherever you download it and place it as a dependency in "Module Settings"
-- Add nsws-2016_1.jar under resources/ as a dependency in "Module Settings"
-- "Export" should be checked for all of the above added .jar files so that they will be included with the plugin when built
+1. Create a new "Intellij Platform Plugin" Project and point it to the directory where the plugin code is located.
+2. Open "Module Settings" on the project and on the "Dependencies" tab and add the project's "resources/dependencies" directory and check the "Export" checkbox so that the libraries are included with the plugin deployment.
 
 # Resolving Issues
-If you encounter any issues, please create an issue. I maintain this in my free time so helping correct an issue is much appreciated.
-
-# Known Issues
-- There needs to be some code cleanup and some better error handling which I am aware of.
+If you encounter any issues, please create an issue here on GitHub. I maintain this in my cannot always get to everything right away. Feel free to submit a pull request with any enhancements/bug fixes.
 
 # Releases
 NetSuite Tools For WebStorm is available in the [JetBrains Plugin Repository](https://plugins.jetbrains.com/plugin/8305?pr=idea) and I will periodically release when there is content to warrant a new release.
 
 Licenses
 ----
-MIT
+This plugin's source code is under the MIT License.
 
-NetSuite Application Developer License
+Additional Licenses for dependencies:
+   * Apache 2.0
+      * Axis and jettison libraries as well as the IntelliJ Open API
+   * NetSuite Application Developer License
+      * NetSuite's license for using their code
 ----
-NetSuite Application Developer License is included in /src and must be agreed to
 
 About Me
 ----
