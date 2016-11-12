@@ -35,7 +35,7 @@ Additional Licenses for dependencies:
    * Apache 2.0
       * Axis and jettison libraries as well as the IntelliJ Open API
    * NetSuite Application Developer License
-      * NetSuite's license for using their code
+
 ----
 
 About Me
