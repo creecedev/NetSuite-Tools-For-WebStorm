@@ -129,8 +129,6 @@ public class CompareWithFileCabinetAction extends AnAction {
 
                                 if (fileId != null) {
                                     fileIds.add(nsClient.searchFile(foldersAndFile[i], currentParentFolder, projectSettingsController.getNsRootFolder()));
-                                } else {
-                                    JOptionPane.showMessageDialog(null, "File: " + foldersAndFile[i] + " Does not exist in NetSuite File Cabinet", "ERROR", JOptionPane.ERROR_MESSAGE);
                                 }
                             }
                         } catch (Exception ex) {
