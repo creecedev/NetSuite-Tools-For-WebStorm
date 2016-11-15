@@ -1,5 +1,7 @@
 package projectsettings;
 
+import com.intellij.credentialStore.CredentialAttributes;
+import com.intellij.credentialStore.Credentials;
 import netsuite.NSAccount;
 import netsuite.NSClient;
 
@@ -93,20 +95,15 @@ public class ProjectSettingsController {
 
     public void saveProjectPassword(NSClient client) {
         if (client != null) {
-            try {
-                passwordSafe.getMasterKeyProvider().storePassword(this.project, this.getClass(), this.project.getName(), client.getNSAccount().getAccountPassword());
-            } catch (PasswordSafeException ex) {
-                return;
-            }
+            CredentialAttributes attributes = new CredentialAttributes(client.getNSAccount().getAccountName() + ":" + client.getNSAccount().getAccountId(), client.getNSAccount().getAccountEmail(), this.getClass(), false);
+            Credentials saveCredentials = new Credentials(attributes.getUserName(), client.getNSAccount().getAccountPassword());
+            PasswordSafe.getInstance().set(attributes, saveCredentials);
         }
     }
 
     public String getProjectPassword() {
-        try {
-            return passwordSafe.getMasterKeyProvider().getPassword(this.project, this.getClass(), this.project.getName());
-        } catch (PasswordSafeException ex) {
-            return null;
-        }
+        CredentialAttributes attributes = new CredentialAttributes(this.getNsAccountName() + ":" + this.getNsAccount(), this.getNsEmail(), this.getClass(), false);
+        return PasswordSafe.getInstance().getPassword(attributes);
     }
 
     public boolean hasAllProjectSettings() {
