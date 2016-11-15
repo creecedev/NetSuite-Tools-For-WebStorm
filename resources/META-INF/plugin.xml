@@ -1,7 +1,7 @@
 <idea-plugin version="1">
   <id>netsuite.tools.plugin</id>
   <name>NetSuite Tools For WebStorm</name>
-  <version>1.0.9</version>
+  <version>1.0.10</version>
   
   <depends>com.intellij.modules.lang</depends>
 
@@ -35,6 +35,7 @@
       <li>1.0.7 Added fix to not overwrite file properties when uploading files</li>
       <li>1.0.8 Added fix to not show success when files fail to upload and also now display upload failure detail</li>
       <li>1.0.9 Added enhancement to save files before uploading and some code cleanup</li>
+      <li>1.0.10 Added new password storage method(s) introduced for 2016.3 releases to replace the deprecated implementation</li>
   </ul>
     ]]>
   </change-notes>
