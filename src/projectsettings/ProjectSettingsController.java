@@ -6,7 +6,6 @@ import netsuite.NSAccount;
 import netsuite.NSClient;
 
 import com.intellij.ide.passwordSafe.PasswordSafe;
-import com.intellij.ide.passwordSafe.impl.PasswordSafeImpl;
 import com.intellij.ide.util.PropertiesComponent;
 import com.intellij.openapi.project.Project;
 import netsuite.NSRolesRestServiceController;
@@ -23,13 +22,9 @@ public class ProjectSettingsController {
     final private String PROJECT_SETTING_NETSUITE_ENVIRONMENT  = "nsEnvironment";
 
     private final PropertiesComponent propertiesComponent;
-    private final PasswordSafeImpl    passwordSafe;
-    private final Project             project;
 
     public ProjectSettingsController(Project project) {
-        this.project             = project;
         this.propertiesComponent = PropertiesComponent.getInstance(project);
-        this.passwordSafe        = (PasswordSafeImpl)PasswordSafe.getInstance();
     }
 
     public String getNsEmail() {
