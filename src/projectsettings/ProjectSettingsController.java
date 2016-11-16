@@ -6,7 +6,6 @@ import netsuite.NSAccount;
 import netsuite.NSClient;
 
 import com.intellij.ide.passwordSafe.PasswordSafe;
-import com.intellij.ide.passwordSafe.PasswordSafeException;
 import com.intellij.ide.passwordSafe.impl.PasswordSafeImpl;
 import com.intellij.ide.util.PropertiesComponent;
 import com.intellij.openapi.project.Project;
