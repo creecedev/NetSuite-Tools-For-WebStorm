@@ -9,7 +9,7 @@ Available Options:
 
 # How To Use
 ### NetSuite Project Creation
-When a project is initially created, the project must be setup with a login, password, environment and NetSuite File Cabinet root folder. These credentials are stored using IntelliJ IDEA Open API PasswordSafe class so they are securely handled and encrypted behind your master password. Once a project is successfully setup, all available actions will be present in the "NetSuite Tools" list which is available by right-clicking on the project.
+When a project is initially created, the project must be setup with a login, password, environment and NetSuite File Cabinet root folder. These credentials are stored using IntelliJ IDEA Open API so they are securely handled. Once a project is successfully setup, all available actions will be present in the "NetSuite Tools" list which is available by right-clicking on the project.
 
 *Please note that if you forget your master password, you will have to create a new one and go through the project setup again.*
 
