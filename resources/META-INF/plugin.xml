@@ -35,12 +35,12 @@
       <li>1.0.7 Added fix to not overwrite file properties when uploading files</li>
       <li>1.0.8 Added fix to not show success when files fail to upload and also now display upload failure detail</li>
       <li>1.0.9 Added enhancement to save files before uploading and some code cleanup</li>
-      <li>1.0.10 Added new password storage method(s) introduced for 2016.3 releases to replace the deprecated implementation</li>
+      <li>1.0.10 [v2016.3+] Added new password storage method(s) introduced for 2016.3 releases to replace the deprecated implementation</li>
   </ul>
     ]]>
   </change-notes>
 
-  <idea-version since-build="141.0"/>
+  <idea-version since-build="163.0"/>
 
   <actions>
     <group id="com.action.netsuitetools" text="NetSuite Tools" description="NetSuite Tools" popup="true">
