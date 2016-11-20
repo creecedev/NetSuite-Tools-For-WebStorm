@@ -21,9 +21,9 @@ public class NSRolesRestServiceController {
     final private String NS_WEB_SERVICES_END_POINT                 = "/services/NetSuitePort_" + NS_WSDL_VERSION;
     final private String NS_SANDBOX_WEB_SERVICES_URL               = "https://webservices.sandbox.netsuite.com";
     final private String NS_RELEASE_PREVIEW_WEB_SERVICES_URL       = "https://webservices.na1.beta.netsuite.com";
-    private final String ADMINISTRATOR_ROLE_ID                     = "3";
-    private final String FULL_ACCESS_ROLE_ID                       = "18";
-    private final String UTF_8_ENCODING                            = "UTF-8";
+    final private String ADMINISTRATOR_ROLE_ID                     = "3";
+    final private String FULL_ACCESS_ROLE_ID                       = "18";
+    final private String UTF_8_ENCODING                            = "UTF-8";
 
     private String buildNLAuthString(String nsEmail, String nsPassword) {
         try {
