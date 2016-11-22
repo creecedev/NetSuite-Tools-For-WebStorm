@@ -1,7 +1,7 @@
 package actions;
 
 import com.intellij.openapi.editor.Document;
-import com.netsuite.webservices.platform.messages_2016_1.WriteResponse;
+import com.netsuite.webservices.platform.messages_2016_2.WriteResponse;
 
 import com.intellij.openapi.ui.MessageType;
 import com.intellij.openapi.ui.popup.Balloon;

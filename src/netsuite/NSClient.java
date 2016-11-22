@@ -1,22 +1,22 @@
 package netsuite;
 
-import com.netsuite.webservices.documents.filecabinet_2016_1.*;
-import com.netsuite.webservices.documents.filecabinet_2016_1.File;
-import com.netsuite.webservices.documents.filecabinet_2016_1.types.FileAttachFrom;
-import com.netsuite.webservices.documents.filecabinet_2016_1.types.MediaType;
-import com.netsuite.webservices.platform.common_2016_1.FileSearchBasic;
-import com.netsuite.webservices.platform.common_2016_1.FolderSearchBasic;
-import com.netsuite.webservices.platform.core_2016_1.*;
+import com.netsuite.webservices.documents.filecabinet_2016_2.*;
+import com.netsuite.webservices.documents.filecabinet_2016_2.File;
+import com.netsuite.webservices.documents.filecabinet_2016_2.types.FileAttachFrom;
+import com.netsuite.webservices.documents.filecabinet_2016_2.types.MediaType;
+import com.netsuite.webservices.platform.common_2016_2.FileSearchBasic;
+import com.netsuite.webservices.platform.common_2016_2.FolderSearchBasic;
+import com.netsuite.webservices.platform.core_2016_2.*;
 
-import com.netsuite.webservices.platform.core_2016_1.types.RecordType;
-import com.netsuite.webservices.platform.core_2016_1.types.SearchMultiSelectFieldOperator;
-import com.netsuite.webservices.platform.core_2016_1.types.SearchStringFieldOperator;
-import com.netsuite.webservices.platform.messages_2016_1.ApplicationInfo;
-import com.netsuite.webservices.platform.messages_2016_1.ReadResponse;
-import com.netsuite.webservices.platform.messages_2016_1.WriteResponse;
-import com.netsuite.webservices.platform_2016_1.NetSuiteBindingStub;
-import com.netsuite.webservices.platform_2016_1.NetSuitePortType;
-import com.netsuite.webservices.platform_2016_1.NetSuiteServiceLocator;
+import com.netsuite.webservices.platform.core_2016_2.types.RecordType;
+import com.netsuite.webservices.platform.core_2016_2.types.SearchMultiSelectFieldOperator;
+import com.netsuite.webservices.platform.core_2016_2.types.SearchStringFieldOperator;
+import com.netsuite.webservices.platform.messages_2016_2.ApplicationInfo;
+import com.netsuite.webservices.platform.messages_2016_2.ReadResponse;
+import com.netsuite.webservices.platform.messages_2016_2.WriteResponse;
+import com.netsuite.webservices.platform_2016_2.NetSuiteBindingStub;
+import com.netsuite.webservices.platform_2016_2.NetSuitePortType;
+import com.netsuite.webservices.platform_2016_2.NetSuiteServiceLocator;
 
 import org.apache.axis.client.Stub;
 import org.apache.axis.message.SOAPHeaderElement;
@@ -27,7 +27,7 @@ import java.rmi.RemoteException;
 
 public class NSClient	{
 
-    final private String NS_WSDL_VERSION = "2016_1";
+    final private String NS_WSDL_VERSION = "2016_2";
 
     /**
      * Proxy class that abstracts the communication with the netsuite Web

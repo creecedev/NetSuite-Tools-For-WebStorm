@@ -8,7 +8,7 @@ import com.intellij.diff.requests.SimpleDiffRequest;
 import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.netsuite.webservices.documents.filecabinet_2016_1.File;
+import com.netsuite.webservices.documents.filecabinet_2016_2.File;
 import netsuite.NSAccount;
 import netsuite.NSClient;
 import projectsettings.ProjectSettingsController;

@@ -15,7 +15,7 @@
         </div>
         <div>
           <br /><br />
-          Open source WebStorm IDE plugin that uses NetSuite SuiteTalk 2016.1 WSDL to provide the ability to:
+          Open source WebStorm IDE plugin that uses NetSuite SuiteTalk 2016.2 WSDL to provide the ability to:
           <ol>
             <li>Specify <b><i>any</i></b> NetSuite File Cabinet Folder as the project root directory or select from SuiteScripts or SuiteBundles listing</li>
             <li>Upload Folder(s) and File(s) to NetSuite File Cabinet</li>
@@ -56,7 +56,7 @@
       <action id="com.action.netsuitetools.comparewithfilecabinet" class="actions.CompareWithFileCabinetAction"
               text="Compare With File Cabinet" description="Compare Selected File(s) with File Cabinet"/>
       <action id="com.netsuitetools.recordsbrowser" class="actions.RecordsBrowserAction"
-              text="2016.1 Records Browser" description="2016.1 Records Browser"/>
+              text="2016.2 Records Browser" description="2016.2 Records Browser"/>
     </group>
   </actions>
 </idea-plugin>

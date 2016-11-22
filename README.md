@@ -1,5 +1,5 @@
 # NetSuite Tools For WebStorm
-NetSuite Tools For WebStorm, is an open-source WebStorm plugin that uses NetSuite SuiteTalk 2016.1 WSDL to provide the ability to:
+NetSuite Tools For WebStorm, is an open-source WebStorm plugin that uses NetSuite SuiteTalk 2016.2 WSDL to provide the ability to:
   - Specify any NetSuite File Cabinet Folder as the project root directory or select from any folder within SuiteScripts or SuiteBundles
   - Upload single or groups of files to NetSuite File Cabinet
   - Compare local files against NetSuite File Cabinet
@@ -14,7 +14,7 @@ When a project is initially created, the project must be setup with a login, pas
 *Please note that if you forget your master password, you will have to create a new one and go through the project setup again.*
 
 ### General Tips
-- Keyboard shortcuts for availble actions such as "Upload Selected File(s)" can be set in the IDE prefrences under Keymap -> Plug-ins -> NetSuite Tools For WebStorm.
+- Keyboard shortcuts for available actions such as "Upload Selected File(s)" can be set in the IDE preferences under Keymap -> Plug-ins -> NetSuite Tools For WebStorm.
 - Any external diff tool specified in the IDE preferences will be respected when comparing local files against the NetSuite File Cabinet. Otherwise, the default IDE diff tool will be used.
 
 # How To Build

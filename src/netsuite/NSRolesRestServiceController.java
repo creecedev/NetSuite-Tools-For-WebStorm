@@ -11,7 +11,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 
 public class NSRolesRestServiceController {
-    final private String NS_WSDL_VERSION                           = "2016_1";
+    final private String NS_WSDL_VERSION                           = "2016_2";
     final private String NS_ENVIRONMENT_PRODUCTION                 = "Production";
     final private String NS_ENVIRONMENT_SANDBOX                    = "Sandbox";
     final private String NS_ENVIRONMENT_RELEASE_PREVIEW            = "Release Preview";
