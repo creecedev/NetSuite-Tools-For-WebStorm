@@ -22,7 +22,7 @@ When a project is initially created, the project must be setup with a login, pas
 2. Open "Module Settings" on the project and on the "Dependencies" tab and add the project's "resources/dependencies" directory and check the "Export" checkbox so that the libraries are included with the plugin deployment.
 
 # Resolving Issues
-If you encounter any issues, please create an issue here on GitHub. I maintain this in my cannot always get to everything right away. Feel free to submit a pull request with any enhancements/bug fixes.
+If you encounter any issues, please create an issue here on GitHub. I maintain this in my spare time and cannot always get to everything right away. Feel free to submit a pull request with any enhancements/bug fixes.
 
 # Releases
 NetSuite Tools For WebStorm is available in the [JetBrains Plugin Repository](https://plugins.jetbrains.com/plugin/8305?pr=idea) and I will periodically release when there is content to warrant a new release.
