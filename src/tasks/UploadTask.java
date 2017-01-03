@@ -145,13 +145,4 @@ public class UploadTask implements Runnable {
             fileDocumentManager.saveDocument(document);
         }
     }
-
-//    private void saveFile(VirtualFile file) {
-//        FileDocumentManager fileDocumentManager = FileDocumentManager.getInstance();
-//        Document document = fileDocumentManager.getDocument(file);
-//
-//        if (fileDocumentManager.isDocumentUnsaved(document)) {
-//            fileDocumentManager.saveDocument(document);
-//        }
-//    }
 }
