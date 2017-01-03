@@ -21,8 +21,6 @@ import netsuite.NSClient;
 import projectsettings.ProjectSettingsController;
 
 import javax.swing.*;
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 
 public class UploadTask implements Runnable {
 
