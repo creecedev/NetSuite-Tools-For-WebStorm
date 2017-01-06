@@ -119,6 +119,7 @@ public class UploadTask implements Runnable {
                     currentParentFolder = folderId;
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, "Error Searching/Creating Folder", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    currentParentFolder = null;
                 }
             }
         }
