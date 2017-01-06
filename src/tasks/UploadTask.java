@@ -60,8 +60,8 @@ public class UploadTask implements Runnable {
         String projectRootDirectory = projectHelper.getProjectRootDirectory(project);
 
         /*
-         * If the uploading a directory, then recursively call uploadFiles with the children files
-         * of the directory to upload them. Otherwise, for each file, attempt to get the NetSuite
+         * If uploading a directory of files, then recursively call uploadFiles with the children
+         * files of the directory to upload them. Otherwise, for each file, attempt to get the NetSuite
          * parent folder ID of the file being uploaded (folders are created if they do not exist)
          * and upload the file into its parent directory.
          */
