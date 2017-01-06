@@ -41,106 +41,134 @@ public class UploadTask implements Runnable {
     public void run() {
         ProgressManager.getInstance().run(new Task.Backgroundable(project, "Preparing to upload selected file(s) to NetSuite File Cabinet") {
             public void run(final ProgressIndicator progressIndicator) {
-                uploadFiles(project, projectHelper.getProjectRootDirectory(project), files, nsClient, projectSettingsController, progressIndicator);
+                uploadFiles(null, progressIndicator);
             }
         });
     }
 
-    private void uploadFiles(Project project, String projectBaseDirectory, VirtualFile[] files, NSClient nsClient, ProjectSettingsController projectSettingsController, ProgressIndicator progessIndicator) {
+    private void uploadFiles(VirtualFile[] fileChildren, ProgressIndicator progessIndicator) {
+        VirtualFile[] files = this.files;
+
+        if (fileChildren != null) {
+            files = fileChildren;
+        }
+
         if (files == null || files.length == 0) {
             return;
         }
 
+        String projectRootDirectory = projectHelper.getProjectRootDirectory(project);
+
+        /*
+         * If the uploading a directory, then recursively call uploadFiles with the children files
+         * of the directory to upload them. Otherwise, for each file, attempt to get the NetSuite
+         * parent folder ID of the file being uploaded (folders are created if they do not exist)
+         * and upload the file into its parent directory.
+         */
         for (VirtualFile file : files) {
             if (file.isDirectory()) {
-                uploadFiles(project, projectBaseDirectory, file.getChildren(), nsClient, projectSettingsController, progessIndicator);
+                uploadFiles(file.getChildren(), progessIndicator);
             } else {
-                Document fileToSave = ApplicationManager.getApplication().runReadAction(new Computable<Document>() {
-                    @Override
-                    public Document compute() {
-                        return getDocument(file);
-                    }
-                });
+                saveDocument(file);
+                String fileNetSuiteParentFolderId = getFileNetSuiteParentFolderId(file, projectRootDirectory);
 
-                ApplicationManager.getApplication().invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        ApplicationManager.getApplication().runWriteAction(new Runnable() {
-                            @Override
-                            public void run() {
-                                saveDocument(FileDocumentManager.getInstance(), fileToSave);
-                            }
-                        });
-                    }
-                }, ModalityState.NON_MODAL);
-
-                final ProjectHelper projectHelper = new ProjectHelper();
-                String projectFilePathFromRootDirectory = projectHelper.getProjectFilePathFromRootDirectory(file, projectBaseDirectory);
-
-                if (projectFilePathFromRootDirectory != null) {
-
-                    String[] foldersAndFile = projectFilePathFromRootDirectory.split("/");
-                    String currentParentFolder =  projectSettingsController.getNsRootFolder();
-
-                    for (int i = 0; i < foldersAndFile.length; i++) {
-                        if (i + 1 != foldersAndFile.length) {
-                            try {
-                                String folderId = nsClient.searchFolder(foldersAndFile[i], currentParentFolder);
-
-                                if (folderId == null) {
-                                    folderId = nsClient.createFolder(foldersAndFile[i], currentParentFolder);
-                                }
-
-                                currentParentFolder = folderId;
-                            } catch (Exception ex) {
-                                JOptionPane.showMessageDialog(null, "Error Searching/Creating Folder", "ERROR", JOptionPane.ERROR_MESSAGE);
-                            }
+                if (fileNetSuiteParentFolderId != null)
+                {
+                    progessIndicator.setFraction(0);
+                    progessIndicator.setText("Uploading File: " + file.getName());
+                    try {
+                        WriteResponse response = nsClient.uploadFile(file.getName(), file.getPath(), nsClient.searchFile(file.getName(), fileNetSuiteParentFolderId, projectSettingsController.getNsRootFolder()), fileNetSuiteParentFolderId, "");
+                        if (!response.getStatus().isIsSuccess()) {
+                            displayUploadResultBalloonMessage(file.getName(), false);
+                            JOptionPane.showMessageDialog(null, "File: " + file.getName() + "\n" +
+                                            "NetSuite File Cabinet Parent Folder ID: " + fileNetSuiteParentFolderId + "\n" +
+                                            "Error Details: " + response.getStatus().getStatusDetail(response.getStatus().getStatusDetail().length - 1).getMessage(),
+                                    "FILE UPLOAD ERROR",
+                                    JOptionPane.ERROR_MESSAGE);
                         } else {
-                            try {
-                                String fileId = nsClient.searchFile(foldersAndFile[i], currentParentFolder, projectSettingsController.getNsRootFolder());
-                                progessIndicator.setText("Uploading File: " + foldersAndFile[i]);
-                                progessIndicator.setFraction(0);
-                                WriteResponse response = nsClient.uploadFile(foldersAndFile[i], file.getPath(), fileId, currentParentFolder, "");
-
-                                if (!response.getStatus().isIsSuccess()) {
-                                    JBPopupFactory.getInstance()
-                                            .createHtmlTextBalloonBuilder("<h3>" + foldersAndFile[i] + " Failed To Upload</h3>", MessageType.ERROR, null)
-                                            .setFadeoutTime(3000)
-                                            .createBalloon()
-                                            .show(RelativePoint.getNorthEastOf(WindowManager.getInstance().getIdeFrame(project).getComponent()),
-                                                    Balloon.Position.above);
-
-                                    JOptionPane.showMessageDialog(null, "File: " + foldersAndFile[i] + "\n" +
-                                                    "NetSuite File Cabinet Parent Folder ID: " + currentParentFolder + "\n" +
-                                                    "Error Details: " + response.getStatus().getStatusDetail(response.getStatus().getStatusDetail().length - 1).getMessage(),
-                                            "FILE UPLOAD ERROR",
-                                            JOptionPane.ERROR_MESSAGE);
-                                } else {
-                                    progessIndicator.setFraction(1);
-                                    JBPopupFactory.getInstance()
-                                            .createHtmlTextBalloonBuilder("<h3>" + foldersAndFile[i] + " Uploaded Successfully</h3>", MessageType.INFO, null)
-                                            .setFadeoutTime(3000)
-                                            .createBalloon()
-                                            .show(RelativePoint.getNorthEastOf(WindowManager.getInstance().getIdeFrame(project).getComponent()),
-                                                    Balloon.Position.above);
-                                }
-                            } catch (Exception ex) {
-                                JOptionPane.showMessageDialog(null, "Error uploading file", "ERROR", JOptionPane.ERROR_MESSAGE);
-                            }
+                            progessIndicator.setFraction(1);
+                            displayUploadResultBalloonMessage(file.getName(), true);
                         }
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(null, "Error uploading file", "ERROR", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
         }
     }
 
-    private Document getDocument(VirtualFile file) {
-        return FileDocumentManager.getInstance().getDocument(file);
+    private String getFileNetSuiteParentFolderId(VirtualFile file, String projectRootDirectory) {
+        String projectFilePathFromRootDirectory = projectHelper.getProjectFilePathFromRootDirectory(file, projectRootDirectory);
+
+        if (projectFilePathFromRootDirectory == null) {
+            return null;
+        }
+
+        String[] foldersAndFile = projectFilePathFromRootDirectory.split("/");
+        String currentParentFolder =  projectSettingsController.getNsRootFolder();
+
+        for (int i = 0; i < foldersAndFile.length; i++) {
+            if (i + 1 != foldersAndFile.length) {
+                try {
+                    String folderId = nsClient.searchFolder(foldersAndFile[i], currentParentFolder);
+
+                    if (folderId == null) {
+                        folderId = nsClient.createFolder(foldersAndFile[i], currentParentFolder);
+                    }
+
+                    currentParentFolder = folderId;
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Error Searching/Creating Folder", "ERROR", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+
+        return currentParentFolder;
     }
 
-    private void saveDocument(FileDocumentManager fileDocumentManager, Document document) {
-        if (fileDocumentManager.isDocumentUnsaved(document)) {
-            fileDocumentManager.saveDocument(document);
+    private void displayUploadResultBalloonMessage(String fileName, Boolean isSuccess) {
+        String message = fileName + " Uploaded Successfully";
+        MessageType messageType = MessageType.INFO;
+
+        if (!isSuccess) {
+            message = fileName + " Failed to Upload";
+            messageType = MessageType.ERROR;
         }
+
+        JBPopupFactory.getInstance()
+                .createHtmlTextBalloonBuilder("<h3>" + message + "</h3>", messageType, null)
+                .setFadeoutTime(3000)
+                .createBalloon()
+                .show(RelativePoint.getNorthEastOf(WindowManager.getInstance().getIdeFrame(project).getComponent()),
+                        Balloon.Position.above);
+    }
+
+    private void saveDocument(VirtualFile file) {
+        if (file == null) {
+            return;
+        }
+
+        FileDocumentManager fileDocumentManager = FileDocumentManager.getInstance();
+
+        Document documentToSave = ApplicationManager.getApplication().runReadAction(new Computable<Document>() {
+            @Override
+            public Document compute() {
+                return fileDocumentManager.getDocument(file);
+            }
+        });
+
+        ApplicationManager.getApplication().invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                ApplicationManager.getApplication().runWriteAction(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (documentToSave != null && fileDocumentManager.isDocumentUnsaved(documentToSave)) {
+                            fileDocumentManager.saveDocument(documentToSave);
+                        }
+                    }
+                });
+            }
+        }, ModalityState.NON_MODAL);
     }
 }
