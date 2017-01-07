@@ -1,8 +1,8 @@
 <idea-plugin version="1">
   <id>netsuite.tools.plugin</id>
   <name>NetSuite Tools For WebStorm</name>
-  <version>1.0.11</version>
-  
+  <version>1.0.12</version>
+
   <depends>com.intellij.modules.lang</depends>
 
   <description><![CDATA[
@@ -37,6 +37,7 @@
       <li>1.0.9 Added enhancement to save files before uploading and some code cleanup</li>
       <li>1.0.10 [v2016.3+] Added new password storage method(s) introduced for 2016.3 releases to replace the deprecated implementation</li>
       <li>1.0.11 Added enhancement to use new 2016.2 WSDL</li>
+      <li>1.0.12 Added enhancement to use Background Tasks (asynchronous processing) for file uploading and comparisons so the IDE does not appear to "freeze" due to original Actions synchronously processing by default</li>
   </ul>
     ]]>
   </change-notes>
