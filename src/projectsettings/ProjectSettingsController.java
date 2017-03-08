@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class ProjectSettingsController {
 
     final private String PROJECT_SETTING_NETSUITE_EMAIL        = "nsProjectEmail";
-    final private String PROJECT_SETTING_NETSUITE_ROOT_FOLDER = "nsProjectRootFolder";
+    final private String PROJECT_SETTING_NETSUITE_ROOT_FOLDER  = "nsProjectRootFolder";
     final private String PROJECT_SETTING_NETSUITE_ACCOUNT      = "nsAccount";
     final private String PROJECT_SETTING_NETSUITE_ACCOUNT_NAME = "nsAccountName";
     final private String PROJECT_SETTING_NETSUITE_ACCOUNT_ROLE = "nsAccountRole";
