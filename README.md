@@ -5,7 +5,7 @@ NetSuite Tools For WebStorm, is an open-source WebStorm plugin that uses NetSuit
   - Compare local files against NetSuite File Cabinet
 
 Available Options:
-![Screenshot](https://plugins.jetbrains.com/files/8305/screenshot_15807.png)
+![Screenshot](https://plugins.jetbrains.com/files/8305/screenshot_16574.png)
 
 # How To Use
 ### NetSuite Project Creation
