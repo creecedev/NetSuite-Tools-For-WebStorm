@@ -234,6 +234,41 @@ public class NSClient	{
         return null;
     }
 
+    public SearchResult getFilesForFolder(String parentFolderId) throws RemoteException {
+
+        if (parentFolderId != null && !parentFolderId.isEmpty()) {
+            try {
+                login();
+            } catch (Exception ex) {
+                return null;
+            }
+
+            RecordRef parentFolderRef = new RecordRef();
+            parentFolderRef.setInternalId(parentFolderId);
+
+            SearchMultiSelectField parentFolderMultiSelectFieldSearch  = new SearchMultiSelectField();
+            RecordRef[] recordRefs = new RecordRef[1];
+            recordRefs[0] = parentFolderRef;
+
+            parentFolderMultiSelectFieldSearch.setSearchValue(recordRefs);
+            parentFolderMultiSelectFieldSearch.setOperator(SearchMultiSelectFieldOperator.anyOf);
+
+            FileSearchBasic filesInFolderSearch = new FileSearchBasic();
+
+            filesInFolderSearch.setFolder(parentFolderMultiSelectFieldSearch);
+
+            // Invoke search() web services operation
+            SearchResult results = _port.search(filesInFolderSearch);
+
+            // Process result
+            if (results.getStatus().isIsSuccess()) {
+                return results;
+            }
+        }
+
+        return null;
+    }
+
     public String searchFolder(String folder, String parentFolderId) throws RemoteException {
         try {
             login();
