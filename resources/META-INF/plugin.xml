@@ -59,7 +59,7 @@
       <action id="com.action.netsuitetools.comparewithfilecabinet" class="actions.CompareWithFileCabinetAction"
               text="Compare With File Cabinet" description="Compare Selected File(s) with File Cabinet"/>
       <action id="com.netsuitetools.recordsbrowser" class="actions.RecordsBrowserAction"
-              text="2016.2 Records Browser" description="2016.2 Records Browser"/>
+              text="2017.1 Records Browser" description="2017.1 Records Browser"/>
     </group>
   </actions>
 </idea-plugin>
