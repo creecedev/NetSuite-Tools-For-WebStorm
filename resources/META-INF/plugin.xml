@@ -48,8 +48,8 @@
   <actions>
     <group id="com.action.netsuitetools" text="NetSuite Tools" description="NetSuite Tools" popup="true">
       <add-to-group group-id="ProjectViewPopupMenu" anchor="last"  />
-      <action id="com.action.netsuitetools.setupproject" class="actions.SetupProjectAction" text="Setup Project"
-              description="Setup Project"/>
+      <action id="com.action.netsuitetools.setupproject" class="actions.SetupProjectAction" text="Set Up Project"
+              description="Set Up Project"/>
       <action id="com.action.netsuitetools.showprojectsettings" class="actions.ShowProjectSettingsAction"
               text="Show Project Settings" description="Show Project Settings"/>
       <action id="com.action.netsuitetools.changeprojectsettings" class="actions.ChangeProjectSettingsAction"
