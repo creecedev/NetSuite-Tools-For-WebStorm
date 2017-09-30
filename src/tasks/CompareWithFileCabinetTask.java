@@ -13,7 +13,7 @@ import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.progress.Task;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.netsuite.webservices.documents.filecabinet_2016_2.File;
+import com.netsuite.webservices.documents.filecabinet_2017_1.File;
 import netsuite.NSClient;
 import projectsettings.ProjectSettingsController;
 

@@ -1,6 +1,6 @@
 package ui;
 
-import com.netsuite.webservices.documents.filecabinet_2016_2.Folder;
+import com.netsuite.webservices.documents.filecabinet_2017_1.Folder;
 
 public class FileTreeFolder {
 

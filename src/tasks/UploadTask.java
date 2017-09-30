@@ -16,7 +16,7 @@ import com.intellij.openapi.util.Computable;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.wm.WindowManager;
 import com.intellij.ui.awt.RelativePoint;
-import com.netsuite.webservices.platform.messages_2016_2.WriteResponse;
+import com.netsuite.webservices.platform.messages_2017_1.WriteResponse;
 import netsuite.NSClient;
 import projectsettings.ProjectSettingsController;
 

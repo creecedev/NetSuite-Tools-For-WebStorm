@@ -6,8 +6,8 @@ import com.intellij.openapi.ui.popup.Balloon;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.openapi.wm.WindowManager;
 import com.intellij.ui.awt.RelativePoint;
-import com.netsuite.webservices.documents.filecabinet_2016_2.Folder;
-import com.netsuite.webservices.platform.core_2016_2.SearchResult;
+import com.netsuite.webservices.documents.filecabinet_2017_1.Folder;
+import com.netsuite.webservices.platform.core_2017_1.SearchResult;
 
 import netsuite.NSClient;
 import projectsettings.ProjectSettingsController;
