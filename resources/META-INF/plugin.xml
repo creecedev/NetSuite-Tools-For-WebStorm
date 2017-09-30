@@ -1,7 +1,7 @@
 <idea-plugin version="1">
   <id>netsuite.tools.plugin</id>
   <name>NetSuite Tools For WebStorm</name>
-  <version>1.0.13</version>
+  <version>1.1.0</version>
 
   <depends>com.intellij.modules.lang</depends>
 
