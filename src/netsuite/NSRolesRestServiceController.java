@@ -14,15 +14,10 @@ public class NSRolesRestServiceController {
     final private String NS_WSDL_VERSION                              = "2017_1";
     final private String NS_ENVIRONMENT_PRODUCTION                    = "Production";
     final private String NS_ENVIRONMENT_SANDBOX                       = "Sandbox";
-    final private String NS_ENVIRONMENT_RELEASE_PREVIEW               = "Release Preview";
-    final private String NS_ENVIRONMENT_EU_RELEASE_PREVIEW            = "EU Release Preview";
     final private String NS_ROLES_REST_SERVICE_URL_PRODUCTION         = "https://rest.netsuite.com/rest/roles";
     final private String NS_ROLES_REST_SERVICE_URL_SANDBOX            = "https://rest.sandbox.netsuite.com/rest/roles";
-    final private String NS_ROLES_REST_SERVICE_URL_RELEASE_PREVIEW    = "https://rest.beta.netsuite.com/rest/roles";
-    final private String NS_ROLES_REST_SERVICE_URL_EU_RELEASE_PREVIEW = "https://rest.eu1.netsuite.com/rest/roles";
     final private String NS_WEB_SERVICES_END_POINT                    = "/services/NetSuitePort_" + NS_WSDL_VERSION;
     final private String NS_SANDBOX_WEB_SERVICES_URL                  = "https://webservices.sandbox.netsuite.com";
-    final private String NS_RELEASE_PREVIEW_WEB_SERVICES_URL          = "https://webservices.beta.netsuite.com";
     final private String ADMINISTRATOR_ROLE_ID                        = "3";
     final private String FULL_ACCESS_ROLE_ID                          = "18";
     final private String UTF_8_ENCODING                               = "UTF-8";
@@ -55,10 +50,6 @@ public class NSRolesRestServiceController {
             rolesRestServiceURL = NS_ROLES_REST_SERVICE_URL_PRODUCTION;
         } else if (nsEnvironment.equals(NS_ENVIRONMENT_SANDBOX)) {
             rolesRestServiceURL = NS_ROLES_REST_SERVICE_URL_SANDBOX;
-        } else if (nsEnvironment.equals(NS_ENVIRONMENT_RELEASE_PREVIEW)) {
-            rolesRestServiceURL = NS_ROLES_REST_SERVICE_URL_RELEASE_PREVIEW;
-        } else if (nsEnvironment.equals(NS_ENVIRONMENT_EU_RELEASE_PREVIEW)) {
-            rolesRestServiceURL = NS_ROLES_REST_SERVICE_URL_EU_RELEASE_PREVIEW;
         }
 
         return rolesRestServiceURL;
@@ -90,7 +81,6 @@ public class NSRolesRestServiceController {
                                         accountJSON.getJSONObject("dataCenterURLs").get("restDomain").toString(),
                                         accountJSON.getJSONObject("dataCenterURLs").get("webservicesDomain").toString().concat(NS_WEB_SERVICES_END_POINT),
                                         NS_SANDBOX_WEB_SERVICES_URL.concat(NS_WEB_SERVICES_END_POINT),
-                                        NS_RELEASE_PREVIEW_WEB_SERVICES_URL.concat(NS_WEB_SERVICES_END_POINT),
                                         accountJSON.getJSONObject("dataCenterURLs").get("systemDomain").toString()));
                             }
                         }

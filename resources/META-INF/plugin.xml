@@ -1,8 +1,8 @@
 <idea-plugin version="1">
   <id>netsuite.tools.plugin</id>
   <name>NetSuite Tools For WebStorm</name>
-  <version>1.1.0</version>
-
+  <version>1.1.1</version>
+ 
   <depends>com.intellij.modules.lang</depends>
 
   <description><![CDATA[
@@ -40,6 +40,7 @@
       <li>1.0.12 Added enhancement to use Background Tasks (asynchronous processing) for file uploading and comparisons so the IDE does not appear to "freeze" due to original Actions synchronously processing by default</li>
       <li>1.0.13 Added fix to get correct release preview account URLs</li>
       <li>1.1.0 Added 2017.1 WSDL support</li>
+      <li>1.1.1 Updated environments to only contain sandbox and production. Domains are changing to a single domain system so the only two (2) domains that should exist now are sandbox and production. Sandbox will eventually be removed since all domains will point to production.</li>
   </ul>
     ]]>
   </change-notes>
