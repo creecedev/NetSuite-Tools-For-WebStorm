@@ -56,11 +56,8 @@ public class NSClient	{
 
         if (this.nsEnvironment.equals("Production")) {
             nsWebServiceURL = this.nsAccount.getProductionWebServicesDomain();
-        }
-        if (this.nsEnvironment.equals("Sandbox")) {
+        } else if (this.nsEnvironment.equals("Sandbox")) {
             nsWebServiceURL = this.nsAccount.getSandboxWebServicesDomain();
-        } else if (this.nsEnvironment.equals("Release Preview")) {
-            nsWebServiceURL = this.nsAccount.getReleasePreviewWebServicesDomain();
         }
 
         // In order to use SSL forwarding for SOAP messages. Refer to FAQ for details

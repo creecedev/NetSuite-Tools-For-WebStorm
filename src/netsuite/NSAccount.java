@@ -10,10 +10,9 @@ public class NSAccount implements Comparable<NSAccount> {
     private String restDomain;
     private String productionWebServicesDomain;
     private String sandboxWebServicesDomain;
-    private String releasePreviewWebServicesDomain;
     private String systemDomain;
 
-    public NSAccount(String accountId, String accountName, String accountEmail, String accountPassword, String roleId, String roleName, String restDomain, String productionWebServicesDomain, String sandboxWebServicesDomain, String releasePreviewWebServicesDomain, String systemDomain) {
+    public NSAccount(String accountId, String accountName, String accountEmail, String accountPassword, String roleId, String roleName, String restDomain, String productionWebServicesDomain, String sandboxWebServicesDomain, String systemDomain) {
         this.accountId                       = accountId;
         this.accountName                     = accountName;
         this.accountEmail                    = accountEmail;
@@ -23,7 +22,6 @@ public class NSAccount implements Comparable<NSAccount> {
         this.restDomain                      = restDomain;
         this.productionWebServicesDomain     = productionWebServicesDomain;
         this.sandboxWebServicesDomain        = sandboxWebServicesDomain;
-        this.releasePreviewWebServicesDomain = releasePreviewWebServicesDomain;
         this.systemDomain                    = systemDomain;
     }
 
@@ -61,10 +59,6 @@ public class NSAccount implements Comparable<NSAccount> {
 
     public String getSandboxWebServicesDomain() {
         return sandboxWebServicesDomain;
-    }
-
-    public String getReleasePreviewWebServicesDomain() {
-        return releasePreviewWebServicesDomain;
     }
 
     public String getSystemDomain() {
