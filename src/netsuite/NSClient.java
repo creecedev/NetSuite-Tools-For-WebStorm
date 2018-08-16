@@ -39,15 +39,7 @@ public class NSClient	{
 
     private String nsEnvironment;
 
-    /**
-     * Flag that indicates whether the user is currently authentciated, and
-     * therefore, whether a valid session is available
-     */
-    private boolean _isAuthenticated;
-
     public NSClient(NSAccount account, String environment) throws ServiceException, IOException   {
-
-        _isAuthenticated = false;
 
         this.nsAccount = account;
         this.nsEnvironment = environment;
@@ -67,11 +59,17 @@ public class NSClient	{
 
         service.setNetSuitePortEndpointAddress(nsWebServiceURL);
 
-        // Enable client cookie management. This is required.
-        service.setMaintainSession(true);
+        // Saving of cookies needs to be disabled, otherwise after login request which sets JSESSIONID,
+        // consecutive requests which includes authentication (passport) header together with JSESSIONID cookie end with "Unexpected error".
+        service.setMaintainSession(false);
 
         // Get the service port (to the correct datacenter)
         _port = service.getNetSuitePort();
+
+        SOAPHeaderElement applicationIdHeader = createApplicationIdHeaders();
+        ((Stub) _port).setHeader(applicationIdHeader);
+        SOAPHeaderElement passportHeader = createPassportHeader();
+        ((Stub) _port).setHeader(passportHeader);
 
         // Setting client timeout to 2 hours for long running operations
         ((NetSuiteBindingStub) _port).setTimeout(1000 * 60 * 60 * 2);
@@ -81,35 +79,39 @@ public class NSClient	{
         return this.nsAccount;
     }
 
-    public void login() throws RemoteException, UnsupportedEncodingException {
-        SOAPHeaderElement applicationIdHeader = createApplicationIdHeaders();
-        ((Stub) _port).setHeader(applicationIdHeader);
-        if (!_isAuthenticated) {
-            Passport passport = new Passport();
-            RecordRef role    = new RecordRef();
+    private SOAPHeaderElement createApplicationIdHeaders() {
+        ApplicationInfo applicationInfo = new ApplicationInfo();
+        applicationInfo.setApplicationId("79927DCC-D1D8-4884-A7C5-F2B155FA00F3"); // TODO: Need own app ID?
+        return new SOAPHeaderElement("urn:messages_" + NS_WSDL_VERSION + ".platform.webservices.netsuite.com", "applicationInfo", applicationInfo);
+    }
 
-            passport.setEmail(this.nsAccount.getAccountEmail());
-            passport.setPassword(this.nsAccount.getAccountPassword());
-            role.setInternalId(this.nsAccount.getRoleId());
-            passport.setRole(role);
-            passport.setAccount(this.nsAccount.getAccountId());
+    private SOAPHeaderElement createPassportHeader() {
+        Passport passport = createPassport();
+        return new SOAPHeaderElement("urn:core_" + NS_WSDL_VERSION + ".platform.webservices.netsuite.com", "passport", passport);
+    }
 
-            Status status = (_port.login(passport)).getStatus();
+    private Passport createPassport() {
+        RecordRef role = new RecordRef();
+        role.setInternalId(this.nsAccount.getRoleId());
 
-            if (status.isIsSuccess() == true) {
-                _isAuthenticated = true;
-            }
+        Passport passport = new Passport();
+        passport.setEmail(this.nsAccount.getAccountEmail());
+        passport.setPassword(this.nsAccount.getAccountPassword());
+        passport.setAccount(this.nsAccount.getAccountId());
+        passport.setRole(role);
+        return passport;
+    }
+
+    public void tryToLogin() throws RemoteException {
+        Passport passport = createPassport();
+        Status status = (_port.login(passport)).getStatus();
+
+        if (!status.isIsSuccess()) {
+            throw new IllegalStateException(new Throwable("Netsuite SuiteTalk login request call was unsuccessful."));
         }
     }
 
     public File downloadFile(String fileInternalId) throws RemoteException {
-        try {
-            login();
-        } catch (Exception ex) {
-            return null;
-        }
-
-
         RecordRef recordRef = new RecordRef();
         recordRef.setInternalId(fileInternalId);
         recordRef.setType(RecordType.file);
@@ -126,12 +128,6 @@ public class NSClient	{
     }
 
     public WriteResponse uploadFile(String nsFileName, String filePath, String fileInternalId, String nsParentFolder, String fileType) throws RemoteException {
-        try {
-            login();
-        } catch (Exception ex) {
-            return null;
-        }
-
         Boolean shouldUpdate = false;
 
         File uploadFile = null;
@@ -191,21 +187,8 @@ public class NSClient	{
         return data;
     }
 
-    private SOAPHeaderElement createApplicationIdHeaders() throws UnsupportedEncodingException {
-        ApplicationInfo applicationInfo = new ApplicationInfo();
-        applicationInfo.setApplicationId("79927DCC-D1D8-4884-A7C5-F2B155FA00F3"); // TODO: Need own app ID?
-        return new SOAPHeaderElement("urn:messages_" + NS_WSDL_VERSION + ".platform.webservices.netsuite.com", "applicationInfo", applicationInfo);
-    }
-
     public SearchResult getSubFolders(String parentFolderId) throws RemoteException {
         if (parentFolderId != null && !parentFolderId.isEmpty()) {
-
-            try {
-                login();
-            } catch (Exception ex) {
-                return null;
-            }
-
             RecordRef parentFolderRef = new RecordRef();
             parentFolderRef.setInternalId(parentFolderId);
 
@@ -232,12 +215,6 @@ public class NSClient	{
     }
 
     public String searchFolder(String folder, String parentFolderId) throws RemoteException {
-        try {
-            login();
-        } catch (Exception ex) {
-            return null;
-        }
-
         RecordRef parentFolderRef = new RecordRef();
         parentFolderRef.setInternalId(parentFolderId);
 
@@ -278,12 +255,6 @@ public class NSClient	{
     }
 
     public String createFolder(String folder, String parentFolderId) throws RemoteException {
-        try {
-            login();
-        } catch (Exception ex) {
-            return null;
-        }
-
         RecordRef parentFolderRef = new RecordRef();
         parentFolderRef.setInternalId(parentFolderId);
 
@@ -307,12 +278,6 @@ public class NSClient	{
     }
 
     public String searchFile(String fileName, String parentFolderId, String projectSettingsRootFolderId) throws RemoteException {
-        try {
-            login();
-        } catch (Exception ex) {
-            return null;
-        }
-
         RecordRef parentFolderRef = new RecordRef();
         parentFolderRef.setInternalId(parentFolderId);
 

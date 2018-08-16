@@ -115,7 +115,7 @@ public class AccountsUI extends JDialog {
 
         if (nsClient != null) {
             try {
-                nsClient.login();
+                nsClient.tryToLogin();
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Error logging in: " + ex.getCause(),  "ERROR", JOptionPane.ERROR_MESSAGE);
                 return;
