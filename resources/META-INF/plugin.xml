@@ -41,6 +41,7 @@
       <li>1.0.13 Added fix to get correct release preview account URLs</li>
       <li>1.1.0 Added 2017.1 WSDL support</li>
       <li>1.1.1 Updated environments to only contain sandbox and production. Domains are changing to a single domain system so the only two (2) domains that should exist now are sandbox and production. Sandbox will eventually be removed since all domains will point to production.</li>
+      <li>1.1.2 Added 2018.2 upload issue from GitHub issue #38 which includes the authentication header with each request. Note that this does not fix upcoming 2FA issue(s). Also added 2018.1 Records Browser link.</li>
   </ul>
     ]]>
   </change-notes>
@@ -61,7 +62,7 @@
       <action id="com.action.netsuitetools.comparewithfilecabinet" class="actions.CompareWithFileCabinetAction"
               text="Compare With File Cabinet" description="Compare Selected File(s) with File Cabinet"/>
       <action id="com.netsuitetools.recordsbrowser" class="actions.RecordsBrowserAction"
-              text="2017.1 Records Browser" description="2017.1 Records Browser"/>
+              text="2018.1 Records Browser" description="2018.1 Records Browser"/>
     </group>
   </actions>
 </idea-plugin>
