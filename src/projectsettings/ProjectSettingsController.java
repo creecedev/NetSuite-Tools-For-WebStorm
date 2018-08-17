@@ -42,9 +42,7 @@ public class ProjectSettingsController {
     }
 
     public void setNsRootFolder(String nsRootFolder) {
-        if (nsRootFolder != null && !nsRootFolder.isEmpty()) {
-            propertiesComponent.setValue(PROJECT_SETTING_NETSUITE_ROOT_FOLDER, nsRootFolder);
-        }
+        propertiesComponent.setValue(PROJECT_SETTING_NETSUITE_ROOT_FOLDER, nsRootFolder);
     }
 
     public String getNsAccount() {
@@ -102,7 +100,6 @@ public class ProjectSettingsController {
 
     public boolean hasAllProjectSettings() {
         return (getNsEmail()       != null && !getNsEmail().isEmpty()      &&
-                getNsRootFolder()  != null && !getNsRootFolder().isEmpty() &&
                 getNsAccount()     != null && !getNsAccount().isEmpty()    &&
                 getNsEnvironment() != null && !getNsEnvironment().isEmpty());
     }
