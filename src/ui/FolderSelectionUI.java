@@ -154,7 +154,7 @@ public class FolderSelectionUI extends JDialog {
             }
             if (folderName.equals(FILE_CABINET_ROOT)) {
                 Integer confirmed = JOptionPane.showConfirmDialog(null, "You are setting the directory to " + folderName + ".\nThis is the root folder of NetSuite. Please be sure this is what you want to do as it is not recommended. Are you sure?",  "WARNING", JOptionPane.CANCEL_OPTION);
-                if (confirmed == 1){
+                if (confirmed == 2){ //CANCEL
                     return;
                 }
                 nsRootFolderId = FILE_CABINET_ROOT_INTERNAL_ID;
