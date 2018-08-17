@@ -153,7 +153,7 @@ public class FolderSelectionUI extends JDialog {
                 return;
             }
             if (folderName.equals(FILE_CABINET_ROOT)) {
-                int confirmed = JOptionPane.showConfirmDialog(null, "You are setting the directory to " + folderName + ".\nThis is the root folder of NetSuite. Please be sure this is what you want to do as it is not recommended. Are you sure?",  "WARNING", JOptionPane.CANCEL_OPTION);
+                int confirmed = JOptionPane.showConfirmDialog(null, "You are setting the directory to " + folderName + ". This is the root folder of the NetSuite File Cabinet. \nThis is not recommended. Are you sure?",  "WARNING", JOptionPane.CANCEL_OPTION);
                 if (confirmed != 0) {
                     return;
                 }
