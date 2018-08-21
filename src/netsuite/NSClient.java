@@ -215,6 +215,15 @@ public class NSClient	{
     }
 
     public String searchFolder(String folder, String parentFolderId) throws RemoteException {
+
+        SearchStringField nameField = new SearchStringField();
+        nameField.setSearchValue(folder);
+        nameField.setOperator(SearchStringFieldOperator.is);
+
+        //search for parent, if no parent, then it is file cabinet root directory
+        if (parentFolderId == null || parentFolderId.isEmpty()) {
+            parentFolderId = "@NONE@";
+        }
         RecordRef parentFolderRef = new RecordRef();
         parentFolderRef.setInternalId(parentFolderId);
 
@@ -226,9 +235,6 @@ public class NSClient	{
         smsf.setOperator(SearchMultiSelectFieldOperator.anyOf);
 
         FolderSearchBasic subDirectoryFolderSearch = new FolderSearchBasic();
-        SearchStringField nameField = new SearchStringField();
-        nameField.setSearchValue(folder);
-        nameField.setOperator(SearchStringFieldOperator.is);
         subDirectoryFolderSearch.setName(nameField);
         subDirectoryFolderSearch.setParent(smsf);
 
