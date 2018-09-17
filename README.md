@@ -4,6 +4,10 @@ NetSuite Tools For WebStorm, is an open-source WebStorm plugin that uses NetSuit
   - Upload single or groups of files to NetSuite File Cabinet
   - Compare local files against NetSuite File Cabinet
 
+### 2FA Notes for 2018.2+:
+In order to use this plugin with 2FA accounts, a "developer" role (See NetSuite help) should be set up and selected after entering credentials on the account selection page.
+While TBA is the obvious choice, this plugin does not currently support TBA.
+
 Available Options:
 ![Screenshot](https://plugins.jetbrains.com/files/8305/screenshot_17370.png)
 
@@ -18,8 +22,11 @@ When a project is initially created, the project must be setup with a login, pas
 - Any external diff tool specified in the IDE preferences will be respected when comparing local files against the NetSuite File Cabinet. Otherwise, the default IDE diff tool will be used.
 
 # How To Build
+Note: The JDK used in creation/compilation of this addon is JDK 1.8 which you can download from Oracle's website.
+
 1. Create a new "Intellij Platform Plugin" Project and point it to the directory where the plugin code is located.
 2. Open "Module Settings" on the project and on the "Dependencies" tab and add the project's "resources/dependencies" directory and check the "Export" checkbox so that the libraries are included with the plugin deployment.
+3. Open "Module Settings" -> "Project Settings" and validate that the language level is set to 8 for JDK 1.8.
 
 # Resolving Issues
 If you encounter any issues, please create an issue here on GitHub. I maintain this in my spare time and cannot always get to everything right away. Feel free to submit a pull request with any enhancements/bug fixes.

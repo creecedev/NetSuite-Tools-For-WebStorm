@@ -33,6 +33,7 @@ public class FolderSelectionUI extends JDialog {
 
     final private String SUITESCRIPTS_FOLDER_INTERNAL_ID = "-15";
     final private String SUITEBUNDLES_FOLDER_INTERNAL_ID = "-16";
+    final private String FILE_CABINET_ROOT_INTERNAL_ID = "";
     final private String FILE_CABINET_ROOT               = "File Cabinet";
     final private String FILE_CABINET_SUITESCRIPTS       = "SuiteScripts";
     final private String FILE_CABINET_SUITEBUNDLES       = "SuiteBundles";
@@ -107,6 +108,9 @@ public class FolderSelectionUI extends JDialog {
         SearchResult folderResults = null;
 
         try {
+            if (parentFolderId == FILE_CABINET_ROOT_INTERNAL_ID){
+                parentFolderId = null;
+            }
             folderResults = this.nsClient.getSubFolders(parentFolderId);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Error getting Sub Folders",  "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -144,20 +148,24 @@ public class FolderSelectionUI extends JDialog {
             FileTreeFolder folder = (FileTreeFolder)node.getUserObject();
             String folderName = folder.getFolder().getName();
 
-            if (folderName != null) {
-                if (folderName.equals(FILE_CABINET_SUITESCRIPTS) ||
-                        folderName.equals(FILE_CABINET_SUITEBUNDLES) ||
-                        folderName.equals(FILE_CABINET_ROOT)) {
-                    JOptionPane.showMessageDialog(null, "Cannot set directory to " + folderName + ".\nPlease select another directory.",  "ERROR", JOptionPane.ERROR_MESSAGE);
+            if (folderName == null) {
+                JOptionPane.showMessageDialog(null, "Folder must be selected or Folder ID specified",  "ERROR", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (folderName.equals(FILE_CABINET_ROOT)) {
+                int confirmed = JOptionPane.showConfirmDialog(null, "You are setting the directory to " + folderName + ". This is the root folder of the NetSuite File Cabinet. \nThis is not recommended. Are you sure?",  "WARNING", JOptionPane.CANCEL_OPTION);
+                if (confirmed != 0) {
                     return;
                 }
+                nsRootFolderId = FILE_CABINET_ROOT_INTERNAL_ID;
+            } else {
                 nsRootFolderId = folder.getFolder().getInternalId();
             }
         } else {
             nsRootFolderId = rootFolderIdTextField.getText().trim();
         }
 
-        if (nsRootFolderId.isEmpty()) {
+        if (nsRootFolderId == null) {
             JOptionPane.showMessageDialog(null, "Folder must be selected or Folder ID specified",  "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }

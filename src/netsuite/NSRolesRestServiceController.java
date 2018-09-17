@@ -18,8 +18,6 @@ public class NSRolesRestServiceController {
     final private String NS_ROLES_REST_SERVICE_URL_SANDBOX            = "https://rest.sandbox.netsuite.com/rest/roles";
     final private String NS_WEB_SERVICES_END_POINT                    = "/services/NetSuitePort_" + NS_WSDL_VERSION;
     final private String NS_SANDBOX_WEB_SERVICES_URL                  = "https://webservices.sandbox.netsuite.com";
-    final private String ADMINISTRATOR_ROLE_ID                        = "3";
-    final private String FULL_ACCESS_ROLE_ID                          = "18";
     final private String UTF_8_ENCODING                               = "UTF-8";
 
     private String buildNLAuthString(String nsEmail, String nsPassword) {
@@ -70,19 +68,17 @@ public class NSRolesRestServiceController {
                         JSONObject accountJSON = accountsJSON.getJSONObject(i);
 
                         if (accountJSON.has("account") && accountJSON.has("dataCenterURLs")) {
-                            if (accountJSON.getJSONObject("role").get("internalId").toString().equals(ADMINISTRATOR_ROLE_ID) ||
-                                    accountJSON.getJSONObject("role").get("internalId").toString().equals(FULL_ACCESS_ROLE_ID)) {
-                                        nsAccounts.add(new NSAccount(accountJSON.getJSONObject("account").get("internalId").toString(),
-                                        accountJSON.getJSONObject("account").get("name").toString(),
-                                        nsEmail,
-                                        nsPassword,
-                                        accountJSON.getJSONObject("role").get("internalId").toString(),
-                                        accountJSON.getJSONObject("role").get("name").toString(),
-                                        accountJSON.getJSONObject("dataCenterURLs").get("restDomain").toString(),
-                                        accountJSON.getJSONObject("dataCenterURLs").get("webservicesDomain").toString().concat(NS_WEB_SERVICES_END_POINT),
-                                        NS_SANDBOX_WEB_SERVICES_URL.concat(NS_WEB_SERVICES_END_POINT),
-                                        accountJSON.getJSONObject("dataCenterURLs").get("systemDomain").toString()));
-                            }
+                            nsAccounts.add(new NSAccount(accountJSON.getJSONObject("account").get("internalId").toString(),
+                                                         accountJSON.getJSONObject("account").get("name").toString(),
+                                                         nsEmail,
+                                                         nsPassword,
+                                                         accountJSON.getJSONObject("role").get("internalId").toString(),
+                                                         accountJSON.getJSONObject("role").get("name").toString(),
+                                                         accountJSON.getJSONObject("dataCenterURLs").get("restDomain").toString(),
+                                                         accountJSON.getJSONObject("dataCenterURLs").get("webservicesDomain").toString().concat(NS_WEB_SERVICES_END_POINT),
+                                                         NS_SANDBOX_WEB_SERVICES_URL.concat(NS_WEB_SERVICES_END_POINT),
+                                                         accountJSON.getJSONObject("dataCenterURLs").get("systemDomain").toString())
+                            );
                         }
                     }
                 } catch (Exception ex) {
