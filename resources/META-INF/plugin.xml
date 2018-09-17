@@ -2,7 +2,7 @@
   <id>netsuite.tools.plugin</id>
   <name>NetSuite Tools For WebStorm</name>
   <version>1.1.3</version>
- 
+    
   <depends>com.intellij.modules.lang</depends>
 
   <description><![CDATA[
@@ -42,7 +42,7 @@
       <li>1.1.0 Added 2017.1 WSDL support</li>
       <li>1.1.1 Updated environments to only contain sandbox and production. Domains are changing to a single domain system so the only two (2) domains that should exist now are sandbox and production. Sandbox will eventually be removed since all domains will point to production.</li>
       <li>1.1.2 Added 2018.2 upload issue from GitHub issue #38 which includes the authentication header with each request. Note that this does not fix upcoming 2FA issue(s). Also added 2018.1 Records Browser link.</li>
-      <li>1.1.3 Removed the only ADMIN/FULL role account selection to allow for selection of custom roles for 2FA that are not admin/full access.
+      <li>1.1.3 Removed the only ADMIN/FULL role account selection to allow for selection of custom roles for 2FA that are not admin/full access.</li>
   </ul>
     ]]>
   </change-notes>
