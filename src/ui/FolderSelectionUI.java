@@ -33,7 +33,7 @@ public class FolderSelectionUI extends JDialog {
 
     final private String SUITESCRIPTS_FOLDER_INTERNAL_ID = "-15";
     final private String SUITEBUNDLES_FOLDER_INTERNAL_ID = "-16";
-    final private String FILE_CABINET_ROOT_INTERNAL_ID = "";
+    final private String FILE_CABINET_ROOT_INTERNAL_ID   = "";
     final private String FILE_CABINET_ROOT               = "File Cabinet";
     final private String FILE_CABINET_SUITESCRIPTS       = "SuiteScripts";
     final private String FILE_CABINET_SUITEBUNDLES       = "SuiteBundles";
@@ -149,11 +149,10 @@ public class FolderSelectionUI extends JDialog {
             String folderName = folder.getFolder().getName();
 
             if (folderName == null) {
-                JOptionPane.showMessageDialog(null, "Folder must be selected or Folder ID specified",  "ERROR", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Either a Folder or Folder ID must be specified",  "ERROR", JOptionPane.ERROR_MESSAGE);
                 return;
-            }
-            if (folderName.equals(FILE_CABINET_ROOT)) {
-                int confirmed = JOptionPane.showConfirmDialog(null, "You are setting the directory to " + folderName + ". This is the root folder of the NetSuite File Cabinet. \nThis is not recommended. Are you sure?",  "WARNING", JOptionPane.CANCEL_OPTION);
+            } else if (folderName.equals(FILE_CABINET_ROOT)) {
+                int confirmed = JOptionPane.showConfirmDialog(null, "You are attempting to set this project's root directory to " + folderName + ". This is the root folder of the NetSuite File Cabinet. \nThis is not recommended. Are you sure?",  "WARNING", JOptionPane.CANCEL_OPTION);
                 if (confirmed != 0) {
                     return;
                 }

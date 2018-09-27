@@ -161,9 +161,27 @@ public class NSClient	{
 
         uploadFile.setContent(loadFile(filePath));
         uploadFile.setFileSize(null);
+        uploadFile.setUrl(null);
 
         if (shouldUpdate) {
             return _port.update(uploadFile);
+        }
+
+        // Handle long file names so an error is not thrown whne attempting to upload files with long filenames
+        if (nsFileName.length() > 40) {
+
+            WriteResponse addResp = _port.add(uploadFile);
+
+            if (addResp.getStatus().isIsSuccess()) {
+                String newFileInternalId = ((RecordRef) addResp.getBaseRef()).getInternalId();
+                uploadFile = downloadFile(newFileInternalId);
+                uploadFile.setCaption(nsFileName.substring(0, 40));
+                uploadFile.setFileSize(null);
+                uploadFile.setUrl(null);
+                return _port.update(uploadFile);
+            }
+
+            return addResp;
         }
 
         return _port.add(uploadFile);

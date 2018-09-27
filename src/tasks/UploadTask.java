@@ -90,7 +90,7 @@ public class UploadTask implements Runnable {
                             displayUploadResultBalloonMessage(file.getName(), true);
                         }
                     } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(null, "Error uploading file", "ERROR", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Error uploading file: " + ex.toString(), "ERROR", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
@@ -118,7 +118,7 @@ public class UploadTask implements Runnable {
 
                     currentParentFolder = folderId;
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "Error Searching/Creating Folder", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Error Searching/Creating Folder: " + ex.toString(), "ERROR", JOptionPane.ERROR_MESSAGE);
                     currentParentFolder = null;
                 }
             }
@@ -140,8 +140,7 @@ public class UploadTask implements Runnable {
                 .createHtmlTextBalloonBuilder("<h3>" + message + "</h3>", messageType, null)
                 .setFadeoutTime(3000)
                 .createBalloon()
-                .show(RelativePoint.getNorthEastOf(WindowManager.getInstance().getIdeFrame(project).getComponent()),
-                        Balloon.Position.above);
+                .show(RelativePoint.getNorthEastOf(WindowManager.getInstance().getIdeFrame(project).getComponent()), Balloon.Position.above);
     }
 
     private void saveDocument(VirtualFile file) {
