@@ -17,6 +17,7 @@ public class AccountsUI extends JDialog {
     private JButton nextButton;
     private JButton cancelButton;
     private JTable accountsTable;
+    private JTextPane twoFactorAuthenticationTextPane;
     private ArrayList<NSAccount> nsAccounts;
     private Project project;
     private String nsEnvironment;
@@ -36,6 +37,9 @@ public class AccountsUI extends JDialog {
         if (nsAccounts == null) {
             JOptionPane.showMessageDialog(null, "Error getting NetSuite Accounts from Roles Rest Service.\nPlease verify that your e-mail and password are correct.",  "ERROR", JOptionPane.ERROR_MESSAGE);
         } else {
+
+            twoFactorAuthenticationTextPane.setText("If your NetSuite account has 2FA enabled, then select an account/custom role with file upload permissions.");
+
             Collections.sort(nsAccounts);
 
             this.nsAccounts = nsAccounts;
