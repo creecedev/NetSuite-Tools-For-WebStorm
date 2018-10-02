@@ -39,6 +39,7 @@ public class UploadAction extends AnAction {
         NSAccount nsAccount = projectSettingsController.getNSAccountForProject();
 
         if (nsAccount == null) {
+            JOptionPane.showMessageDialog(null, "Access to configured NetSuite account is no longer valid. Configured NetSuite account password may need to be updated.", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
