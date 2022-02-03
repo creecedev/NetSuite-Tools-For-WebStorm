@@ -1,4 +1,7 @@
+## <i><b>This plugin is no longer maintained. NetSuite has created their own (yay) and it is highly suggested to use that plugin instead. This repository will remain for archival/reference purposes only. Thank you to everyone who helped and made it possible to have some awesome NetSuite WebStorm Tools.</b></i>
+
 # NetSuite Tools For WebStorm
+
 NetSuite Tools For WebStorm, is an open-source WebStorm plugin that uses NetSuite SuiteTalk 2017.1 WSDL to provide the ability to:
   - Specify any NetSuite File Cabinet Folder as the project root directory or select from any folder within SuiteScripts or SuiteBundles
   - Upload single or groups of files to NetSuite File Cabinet
